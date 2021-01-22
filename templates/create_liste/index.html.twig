@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CreateListeController!{% endblock %}
+
+{% block body %}
+	<div class="container-fluid">
+
+		{{ form_errors(listeform) }}
+		{#	{{ Détails du formulaire élément par élémént avec des éléments en plus }}#}
+		{{ form_start(listeform) }}
+
+		{{ form_label(listeform.name) }}
+		</br>
+		{{ form_widget(listeform.name) }}
+		{{ form_errors(listeform.name) }}
+		<hr>
+		{{ form_label(listeform.description) }}
+		</br>
+		{{ form_widget(listeform.description) }}
+		{{ form_errors(listeform.description) }}
+		<hr>
+		{{ form_label(listeform.end_date) }}
+		</br>
+		{{ form_widget(listeform.end_date) }}
+		{{ form_errors(listeform.end_date) }}
+
+		<hr>
+		{{ form_label(listeform.children) }}
+		</br>
+		{{ form_widget(listeform.children) }}
+		{{ form_errors(listeform.children) }}
+		<hr>
+		{{ form_widget(listeform.Envoyer) }}
+		{{ form_end(listeform) }}
+	</div>
+{% endblock %}

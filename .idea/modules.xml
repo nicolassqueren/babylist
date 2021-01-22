@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/babylist.iml" filepath="$PROJECT_DIR$/.idea/babylist.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../foodtruck/.idea/foodtruck.iml" filepath="$PROJECT_DIR$/../foodtruck/.idea/foodtruck.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../joker/.idea/joker.iml" filepath="$PROJECT_DIR$/../joker/.idea/joker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../quizz/.idea/quizz.iml" filepath="$PROJECT_DIR$/../quizz/.idea/quizz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../school/.idea/school.iml" filepath="$PROJECT_DIR$/../school/.idea/school.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../tv-show/.idea/tv-show.iml" filepath="$PROJECT_DIR$/../tv-show/.idea/tv-show.iml" />
+    </modules>
+  </component>
+</project>
