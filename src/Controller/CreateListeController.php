@@ -24,13 +24,26 @@ class CreateListeController extends AbstractController
 			$listeForm = $this->createForm(ListeType::class, $liste);
 			$listeForm->handleRequest($request);
 			if ($listeForm->isSubmitted() ){
+				//if forms list is valid
 				if ($listeForm->isValid()){
-					dump($listeForm);
+					//Get user for liste and set Owner_id
+					$liste->setOwner( $this->getUser());
+					//TODO: test if user have already One Liste
+//					$listeAlready = $entityManager->getRepository(Liste::class)->findByOwnerId($user->getId());
+//					foreach ($listeAlready as $liste){
+//						var_dump($liste);
+//					}
+//					die();
+					$entityManager->persist($liste);
+					$entityManager->flush();
+
+					//TODO: Redirect to the list
+					return $this->redirectToRoute("home");
 				}else{
 					dump('Not valid Malin');
 				}
 
-//    		return $this->redirectToRoute("my_first_template");
+
 			}
 		}else{
 			echo "Redirect to another route";

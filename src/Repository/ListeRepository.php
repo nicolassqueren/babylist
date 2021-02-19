@@ -19,22 +19,20 @@ class ListeRepository extends ServiceEntityRepository
         parent::__construct($registry, Liste::class);
     }
 
-    // /**
-    //  * @return Liste[] Returns an array of Liste objects
-    //  */
-    /*
-    public function findByExampleField($value)
+     /**
+      * @return Liste[] Returns an array of Liste objects
+      */
+    public function findByOwnerId($value)
     {
-        return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
+        return $this->createQueryBuilder('owner_id')
+            ->andWhere('owner_id = :val')
             ->setParameter('val', $value)
-            ->orderBy('l.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Liste
