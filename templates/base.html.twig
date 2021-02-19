@@ -24,18 +24,25 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="{{ path('app_register') }}" >Register</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link"href="{{ path('app_login') }}">Login</a>
-						</li>
+						{% if app.user %}
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" href="{{ path('listes') }}" >Mes listes</a>
+							</li>
+						{% else %}
+							<li class="nav-item">
+								<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Mes listes</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" href="{{ path('app_register') }}" >Register</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link"href="{{ path('app_login') }}">Login</a>
+							</li>
+						{% endif %}
+
 						<li class="nav-item">
 
 							<a class="nav-link" href="{{ path('create_liste') }}">Create List</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
 						</li>
 					</ul>
 				</div>

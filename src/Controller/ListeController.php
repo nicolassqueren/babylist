@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Liste;
 use App\Entity\Objet;
+use App\Entity\User;
 use App\Form\ObjetType;
+use App\Repository\ListeRepository;
 use App\Repository\ObjetRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,6 +24,7 @@ class ListeController extends AbstractController
 	 */
     public function index($id, EntityManagerInterface $entityManager, ObjetRepository $objetRepository): Response
     {
+    	/** @var Liste $liste */
 		$liste = $entityManager->getRepository(Liste::class)->find($id);
         return $this->render('liste/index.html.twig', [
             'controller_name' => 'ListeController',
@@ -29,6 +32,23 @@ class ListeController extends AbstractController
 			'objets' => $objetRepository->findByListe($liste),
         ]);
     }
+
+	/**
+	 * * @Route("/listes", name="listes")
+	 */
+    public function listes (ListeRepository $listesRepository){
+		/** @var User $user */
+		$user = $this->getUser();
+		if ($user){
+			//TODO Ne récupérer que les listes de l'utilisateur OwnerId
+			$listes =$listesRepository->findByOwner($user);
+			return $this->render('home/index.html.twig', [
+				'controller_name' => 'HomeController',
+				'listes' => $listes,
+			]);
+		}
+	}
+
 
 
 }

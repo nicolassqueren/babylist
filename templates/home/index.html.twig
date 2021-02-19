@@ -8,7 +8,9 @@
 	<div class="container">
 		<h1 class="text-center">BABY LIST</h1>
 	</div>
-	<h2>Vos listes</h2>
+
+	{% if listes %}
+		<h2>Vos listes</h2>
 	{% for liste in listes %}
 		<div>
 			<div>{{ liste.name }}</div>
@@ -16,7 +18,7 @@
 		</div>
 	{% else %}
 		<div>
-			<h2>Vous n'avez pas de Listes</h2>
+			<h2>Vous pouvez créer une autre Liste</h2>
 			<div class="container">
 				<button>
 					<a href="{{ path('create_liste') }}">Create Liste</a>
@@ -24,5 +26,6 @@
 			</div>
 		</div>
 	{% endfor %}
+	{% endif %}
 </div>
 {% endblock %}
