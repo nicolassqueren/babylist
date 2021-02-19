@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Liste;
 use App\Entity\Objet;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -11,6 +12,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Objet|null findOneBy(array $criteria, array $orderBy = null)
  * @method Objet[]    findAll()
  * @method Objet[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Objet[]    findByListe(Liste $liste, array $orderBy = null, $limit = null, $offset = null)
  */
 class ObjetRepository extends ServiceEntityRepository
 {

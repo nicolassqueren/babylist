@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ObjetController!{% endblock %}
+
+{% block body %}
+	<div class="container-fluid">
+		{{ form_errors(objetform) }}
+		{{ form_start(objetform) }}
+
+		{{ form_label(objetform.title) }}
+		</br>
+		{{ form_widget(objetform.title) }}
+		{{ form_errors(objetform.title) }}
+
+		{{ form_widget(objetform.Envoyer) }}
+		{{ form_end(objetform) }}
+	</div>
+{% endblock %}

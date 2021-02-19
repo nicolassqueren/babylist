@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Liste;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -11,6 +12,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Liste|null findOneBy(array $criteria, array $orderBy = null)
  * @method Liste[]    findAll()
  * @method Liste[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Liste[]    findByOwner(User $owner, array $orderBy = null, $limit = null, $offset = null)
  */
 class ListeRepository extends ServiceEntityRepository
 {
@@ -19,19 +21,19 @@ class ListeRepository extends ServiceEntityRepository
         parent::__construct($registry, Liste::class);
     }
 
-     /**
-      * @return Liste[] Returns an array of Liste objects
-      */
-    public function findByOwnerId($value)
-    {
-        return $this->createQueryBuilder('owner_id')
-            ->andWhere('owner_id = :val')
-            ->setParameter('val', $value)
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
+//     /**
+//      * @return Liste[] Returns an array of Liste objects
+//      */
+//    public function findByOwnerId($value)
+//    {
+//        return $this->createQueryBuilder('owner_id')
+//            ->andWhere('owner_id = :val')
+//            ->setParameter('val', $value)
+//            ->setMaxResults(10)
+//            ->getQuery()
+//            ->getResult()
+//        ;
+//    }
 
 
     /*

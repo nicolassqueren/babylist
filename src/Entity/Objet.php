@@ -28,7 +28,7 @@ class Objet
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $image;
 
@@ -38,9 +38,9 @@ class Objet
     private $link;
 
     /**
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
-    private $state = [];
+    private $state;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -110,12 +110,12 @@ class Objet
         return $this;
     }
 
-    public function getState(): ?array
+    public function getState(): ?string
     {
         return $this->state;
     }
 
-    public function setState(?array $state): self
+    public function setState(?string $state): self
     {
         $this->state = $state;
 
