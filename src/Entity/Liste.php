@@ -50,6 +50,21 @@ class Liste
      */
     private $owner;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $is_Shared;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $shared_url;
+
     public function __construct()
     {
         $this->objets = new ArrayCollection();
@@ -146,6 +161,42 @@ class Liste
     public function setOwner(?User $owner): self
     {
         $this->owner = $owner;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getIsShared(): ?bool
+    {
+        return $this->is_Shared;
+    }
+
+    public function setIsShared(bool $is_Shared): self
+    {
+        $this->is_Shared = $is_Shared;
+
+        return $this;
+    }
+
+    public function getSharedUrl(): ?string
+    {
+        return $this->shared_url;
+    }
+
+    public function setSharedUrl(?string $shared_url): self
+    {
+        $this->shared_url = $shared_url;
 
         return $this;
     }

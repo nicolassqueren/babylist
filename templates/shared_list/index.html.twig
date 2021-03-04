@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SharedListController!{% endblock %}
+
+
+{% block body %}
+
+	{% if  liste.isShared %}
+		{%  for message in app.flashes('success') %}
+			<div class="alert alert-success">
+				{{ message }}
+			</div>
+		{% endfor %}
+		{%  for message in app.flashes('error') %}
+			<div class="alert alert-danger">
+				{{ message }}
+			</div>
+		{% endfor %}
+		{%  for message in app.flashes('warning') %}
+			<div class="alert alert-warning">
+				{{ message }}
+			</div>
+		{% endfor %}
+		<div class="container-fluid">
+			<div class="container">
+				<h1>Voici la Liste de {{ liste.name }}</h1>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<div class="container">
+				<ul>
+					<li>{{ liste.description }}</li>
+					<li>{{ liste.children }}</li>
+				</ul>
+			</div>
+		</div>
+		<div class="container-fluid container-objets">
+			<table class="table">
+				<thead>
+				<tr>
+					<th style="width: 20%"  scope="col">image</th>
+					<th scope="col">title</th>
+					<th style="width: 20%" scope="col">description</th>
+					<th scope="col">link</th>
+					<th scope="col">state</th>
+					<th scope="col">brand</th>
+					<th scope="col">reservedBy</th>
+				</tr>
+				</thead>
+				{% for objet in objets %}
+					<tbody>
+					<tr>
+						<td><img class="img-objet" src="{{ asset('' ~ objet.image) }}"/></td>
+						<td>{{ objet.title }}</td>
+						<td >{{ objet.description }}</td>
+						<td><a href="{{ objet.link }}"> Le lien {{ objet.title }}</a></td>
+						<td>{{ objet.state }}</td>
+						<td>{{ objet.brand }}</td>
+						{#				{{TODO: Voir actions de réserver par un autre utilisateur}}#}
+						<td>
+							{% if  objet.reservedby %}
+								<div>Déja réserver !</div>
+								<a href="{{ path('objet_cancel_reserved', {id:liste.id, objetId: objet.id}) }}">Cancel Reservation</a>
+							{% else %}
+								<button class="btn btn-lg btn-primary text-white" >
+									<a class="text-white" href="{{ path('objet_reserved', {id: liste.id, objetId: objet.id}) }}">
+										<i class="icon-edit icon-large">Je reserve </i>
+									</a>
+								</button>
+							{% endif %}
+						</td>
+					</tr>
+					</tbody>
+				{% else %}
+					<div>
+						<h2>no records found</h2>
+					</div>
+				{% endfor %}
+			</table>
+		</div>
+	{% else %}
+		<div class="container-fluid">
+			<div class="container">
+				<h1>Voici la Liste de {{ liste.name }}</h1>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<div class="container">
+				<div>{{ liste.description }}</div>
+				<div>Vous n'avez pas partagé votre liste, elle n'est donc pour l'instant accessible !</div>
+				<a href="{{ path('liste', {id:liste.id}) }}">{{ liste.name }}</a>
+			</div>
+		</div>
+	{% endif %}
+
+{% endblock %}

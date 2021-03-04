@@ -1,0 +1,53 @@
+
+{% extends 'base.html.twig' %}
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+	<div>
+
+		<img class="home-bk" src="{{ asset('/images/home-bk.jpg') }}"/>
+		<h1 class="text-center">Vos listes de naissance</h1>
+	</div>
+	<div class="container-fluid">
+			<div class="container">
+
+			{% if listes %}
+				<h2>Vos listes</h2>
+				<div class="container-listes">
+					{% for liste in listes %}
+						<div class="card liste-item" >
+							<img class="card-img-top" src="{{ asset('' ~ liste.image) }}" alt="Card image {{ liste.name }}">
+							<div class="card-body">
+								<h5 class="card-title">{{ liste.name }}</h5>
+								<p class="card-text">{{ liste.children }}</p>
+								<p class="card-text">{{ liste.description }}</p>
+								<a class="text-white" href="{{ path('liste', {id:liste.id}) }}">Got to {{ liste.name }}</a>
+								<button class="btn btn-lg btn-primary text-white" >
+									<a class="text-white" href="{{ path('liste_edit', {id: liste.id}) }}">
+										<i class="icon-edit icon-large">	Edit </i>
+
+									</a>
+								</button>
+								<button type="button" class="btn btn-primary px-3">
+									<a class="text-white" href="{{ path('liste_delete', {id: liste.id}) }}">
+										<i class="icon-trash"></i>
+									</a>
+								</button>
+							</div>
+						</div>
+					{% else %}
+						<div>
+							<h2>Vous pouvez créer Vous aussi votre Liste</h2>
+							<div class="container">
+								<button>
+									<a href="{{ path('create_liste') }}">Create Liste</a>
+								</button>
+							</div>
+						</div>
+					{% endfor %}
+					{% endif %}
+				</div>
+
+			</div>
+	</div>
+{% endblock %}

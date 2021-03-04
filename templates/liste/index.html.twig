@@ -8,12 +8,43 @@
 		<h1>Votre Liste {{ liste.name }}</h1>
 	</div>
 </div>
+	{%  for message in app.flashes('success') %}
+		<div class="alert alert-success">
+			{{ message }}
+		</div>
+	{% endfor %}
+	{%  for message in app.flashes('error') %}
+		<div class="alert alert-danger">
+			{{ message }}
+		</div>
+	{% endfor %}
 <div class="container-fluid">
 	<div class="container">
 		<ul>
 			<li>{{ liste.description }}</li>
 			<li>{{ liste.children }}</li>
+
 		</ul>
+		{% if  liste.isShared %}
+			<div class="info_shared_list">
+				<p>Votre Liste est partagée !</p>
+			</div>
+			<button class="btn btn-lg btn-primary text-white" >
+				<a class="text-white" href="{{ path('liste_close', {id: liste.id}) }}">
+					<i class="icon-plus-sign-alt">Close my List</i>
+				</a>
+			</button>
+			<div>
+				<p>Voici le lien :</p>
+				<p>{{ liste.sharedurl }}</p>
+			</div>
+		{% else %}
+			<button id="shared" class="btn btn-lg btn-primary text-white" >
+				<a class="text-white" href="{{ path('liste_shared', {id: liste.id}) }}">
+					<i class="icon-plus-sign-alt">Shared List</i>
+				</a>
+			</button>
+		{% endif %}
 	</div>
 	<button class="btn btn-lg btn-primary text-white" >
 		<a class="text-white" href="{{ path('objet_new', {id: liste.id}) }}">
@@ -47,10 +78,10 @@
 {#				{{TODO: Voir actions de réserver par un autre utilisateur}}#}
 				<td></td>
 				<td>
+
 					<button class="btn btn-lg btn-primary text-white" >
 						<a class="text-white" href="{{ path('objet_edit', {id: liste.id, objetId: objet.id}) }}">
 							<i class="icon-edit icon-large">	Edit </i>
-
 						</a>
 					</button>
 					<button type="button" class="btn btn-primary px-3">
@@ -67,17 +98,6 @@
 			</div>
 		{% endfor %}
 		</table>
-{#		{{ form_errors(objetform) }}#}
-{#		#}{#	{{ Détails du formulaire élément par élémént avec des éléments en plus }}#}
-{#		{{ form_start(objetform) }}#}
-
-{#		{{ form_label(objetform.title) }}#}
-{#		</br>#}
-{#		{{ form_widget(objetform.title) }}#}
-{#		{{ form_errors(objetform.title) }}#}
-
-{#		{{ form_widget(objetform.Envoyer) }}#}
-{#		{{ form_end(objetform) }}#}
 	</div>
-
+</div>
 {% endblock %}

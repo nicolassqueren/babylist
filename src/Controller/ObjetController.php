@@ -125,9 +125,9 @@ class ObjetController extends AbstractController
 	 */
 	public function delete (EntityManagerInterface $entityManager, $id, $objetId, Request $request) :Response{
 		/** @var Objet $objet */
-		$objet = $entityManager->getRepository(Objet::class)->find($id);
+		$objet = $entityManager->getRepository(Objet::class)->find($objetId);
 		/** @var Liste $liste */
-		$liste = $entityManager->getRepository(Liste::class)->find($objetId);
+		$liste = $entityManager->getRepository(Liste::class)->find($id);
 		$entityManager->remove($objet);
 		$entityManager->flush();
 
