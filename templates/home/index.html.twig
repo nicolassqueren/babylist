@@ -27,8 +27,8 @@
 				<div class="info_liste four" >4. Recevez vos cadeaux</div>
 			</div>
 		</div>
+		{% if listes %}
 			<div class="container user_container_listes">
-			{% if listes %}
 				<h2>Vos listes </h2>
 				<div class="container-listes">
 					{% for liste in listes %}
@@ -51,8 +51,41 @@
 							</div>
 						</div>
 					{% endfor %}
-					{% endif %}
 				</div>
 			</div>
+		{% else %}
+			{% if listes_public %}
+				<div class="container-fluid block-public-listes">
+					<div class="container">
+						<h2 class="text-center">Les listes accessibles</h2>
+					</div>
+				</div>
+				<div class="container col-md-6 listes_public row">
+					{% for liste in listes_public %}
+						{% if  liste.isShared %}
+							<div class="card liste-item col-md-12 ">
+								<img class="card-img-top" src="{{ asset('' ~ liste.image) }}" alt="Card image {{ liste.name }}">
+								<div class="card-body">
+									<h5 class="card-title">{{ liste.name }}</h5>
+									<p class="card-text">{{ liste.children }}</p>
+									<p class="card-text">{{ liste.description }}</p>
+									<div class="shared_liste">
+										<a class="text-white" href="{{ liste.sharedurl }}">Voir la liste de {{ liste.owner.name }} <i class="fas fa-arrow-right"></i></a>
+									</div>
+								</div>
+							</div>
+						{% endif %}
+					{% endfor %}
+				</div>
+			{% else %}
+					<div class="container-fluid">
+						<div>Nous vous invitons à vous connecter !</div>
+						<button class="btn btn-lg btn_action text-white" >
+							<a class="text-white" href="{{ path('app_register') }}">Créer votre compte</a>
+						</button>
+
+					</div>
+			{% endif %}
+		{% endif %}
 	</div>
 {% endblock %}

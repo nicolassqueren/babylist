@@ -1,54 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ListeController!{% endblock %}
+{% block title %}Liste de {{ liste.name }} {% endblock %}
 
 {% block body %}
 <div class="container-fluid">
-	<div class="container">
-		<h1>Votre Liste {{ liste.name }}</h1>
-	</div>
-</div>
-	{%  for message in app.flashes('success') %}
-		<div class="alert alert-success">
-			{{ message }}
-		</div>
-	{% endfor %}
-	{%  for message in app.flashes('error') %}
-		<div class="alert alert-danger">
-			{{ message }}
-		</div>
-	{% endfor %}
-<div class="container-fluid">
-	<div class="container">
-		<ul>
-			<li>{{ liste.description }}</li>
-			<li>{{ liste.children }}</li>
-
-		</ul>
-		{% if  liste.isShared %}
+	<div class="container container-liste">
+		<div class="block-liste-infos">
+			<h1>Votre Liste {{ liste.name }}</h1>
+			<p>{{ liste.description }}</p>
+			<p>{{ liste.children }}</p>
+			<p>{{ liste.adresse }}</p>
+			{% if  liste.isShared %}
 			<div class="info_shared_list">
 				<p>Votre Liste est partagée !</p>
 			</div>
-			<button class="btn btn-lg btn-primary text-white" >
-				<a class="text-white" href="{{ path('liste_close', {id: liste.id}) }}">
-					<i class="icon-plus-sign-alt">Close my List</i>
-				</a>
-			</button>
-			<div>
-				<p>Voici le lien :</p>
-				<p>{{ liste.sharedurl }}</p>
-			</div>
-		{% else %}
-			<button id="shared" class="btn btn-lg btn-primary text-white" >
-				<a class="text-white" href="{{ path('liste_shared', {id: liste.id}) }}">
-					<i class="icon-plus-sign-alt">Shared List</i>
-				</a>
-			</button>
-		{% endif %}
+			{% endif %}
+		</div>
+		<div class="actions-liste">
+			{% if  liste.isShared %}
+				<button class="btn btn-lg liste_btn btn_warning text-white" >
+					<a class="text-white" href="{{ path('liste_close', {id: liste.id}) }}">
+						<i class="fas fa-times-circle"></i>Close my List</i>
+					</a>
+				</button>
+				<div class="shared_liste">
+					<p>Voici le lien : <span class="liste_link">{{ liste.sharedurl }}</span></p>
+					<a href="{{ liste.sharedurl }}">Voir votre liste <i class="fas fa-arrow-right"></i></a>
+				</div>
+			{% else %}
+				<button id="shared" class="btn btn-lg  liste_btn btn_action text-white" >
+					<a class="text-white" href="{{ path('liste_shared', {id: liste.id}) }}">
+						<i class="fas fa-share-alt"></i>Shared List</i>
+					</a>
+				</button>
+			{% endif %}
+		</div>
 	</div>
-	<button class="btn btn-lg btn-primary text-white" >
+	<button class="btn btn-lg liste_btn btn_action text-white" >
 		<a class="text-white" href="{{ path('objet_new', {id: liste.id}) }}">
-			<i class="icon-plus-sign-alt">Create objet</i>
+			<i class="icon-plus-sign-alt"> Ajouter</i>
 		</a>
 	</button>
 </div>
@@ -62,7 +52,7 @@
 				<th scope="col">link</th>
 				<th scope="col">state</th>
 				<th scope="col">brand</th>
-				<th scope="col">reservedBy</th>
+				<th scope="col">date</th>
 				<th scope="col">Actions</th>
 			</tr>
 			</thead>
@@ -72,19 +62,30 @@
 				<td><img class="img-objet" src="{{ asset('' ~ objet.image) }}"/></td>
 				<td>{{ objet.title }}</td>
 				<td >{{ objet.description }}</td>
-				<td><a href="{{ objet.link }}"> Le lien {{ objet.title }}</a></td>
+				<td>
+					{% if objet.link %}
+						<a href="{{ objet.link }}"> Le lien {{ objet.title }}</a>
+					{% endif %}
+				</td>
 				<td>{{ objet.state }}</td>
 				<td>{{ objet.brand }}</td>
-{#				{{TODO: Voir actions de réserver par un autre utilisateur}}#}
-				<td></td>
+				<td>
+					{% if objet.datechoice == "Avant la naissance" %}
+						<div><img class="delivery" src="{{ asset('/images/delivery.png') }}"/></div>
+						<div class="alert-danger">{{ objet.datechoice }}</div>
+					{% else %}
+						<div>{{ objet.datechoice }}</div>
+					{% endif %}
+
+				</td>
 				<td>
 
-					<button class="btn btn-lg btn-primary text-white" >
+					<button class="btn btn-lg btn_action text-white" >
 						<a class="text-white" href="{{ path('objet_edit', {id: liste.id, objetId: objet.id}) }}">
 							<i class="icon-edit icon-large">	Edit </i>
 						</a>
 					</button>
-					<button type="button" class="btn btn-primary px-3">
+					<button type="button" class="btn btn_warning px-3">
 						<a class="text-white" href="{{ path('objet_delete', {id: liste.id, objetId: objet.id}) }}">
 							<i class="icon-trash"></i>
 						</a>

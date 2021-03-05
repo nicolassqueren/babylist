@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Objet;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -30,6 +31,12 @@ class ObjetType extends AbstractType
             ->add('link')
             ->add('state')
             ->add('brand')
+			->add('datechoice', ChoiceType::class, [
+				'choices'  => [
+					'Avant la naissance' => "Avant la naissance",
+					'Apres la naissance' => "Après la naissance",
+				]
+			])
 			->add('Envoyer',
 				SubmitType::class,
 				[

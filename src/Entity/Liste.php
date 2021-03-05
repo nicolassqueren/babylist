@@ -65,6 +65,11 @@ class Liste
      */
     private $shared_url;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $adresse;
+
     public function __construct()
     {
         $this->objets = new ArrayCollection();
@@ -197,6 +202,18 @@ class Liste
     public function setSharedUrl(?string $shared_url): self
     {
         $this->shared_url = $shared_url;
+
+        return $this;
+    }
+
+    public function getAdresse(): ?string
+    {
+        return $this->adresse;
+    }
+
+    public function setAdresse(?string $adresse): self
+    {
+        $this->adresse = $adresse;
 
         return $this;
     }

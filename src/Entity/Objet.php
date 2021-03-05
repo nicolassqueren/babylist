@@ -57,6 +57,11 @@ class Objet
      */
     private $reservedBy;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $datechoice;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -154,6 +159,18 @@ class Objet
     public function setReservedBy(?User $reservedBy): self
     {
         $this->reservedBy = $reservedBy;
+
+        return $this;
+    }
+
+    public function getDatechoice(): ?string
+    {
+        return $this->datechoice;
+    }
+
+    public function setDatechoice(?string $datechoice): self
+    {
+        $this->datechoice = $datechoice;
 
         return $this;
     }

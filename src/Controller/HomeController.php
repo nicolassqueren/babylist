@@ -19,16 +19,27 @@ class HomeController extends AbstractController
     	/** @var User $user */
     	$user = $this->getUser();
     	if ($user){
-    		//TODO Ne récupérer que les listes de l'utilisateur OwnerId
+    		//Get Listes byownerId
 			$listes =$listesRepository->findByOwner($user);
-			return $this->render('home/index.html.twig', [
-				'controller_name' => 'HomeController',
-				'listes' => $listes,
-			]);
+			//Get Liste public
+			$listespublic = $listesRepository->findPublicListes(1);
+			if ($listes) {
+				return $this->render('home/index.html.twig', [
+					'controller_name' => 'HomeController',
+					'listes' => $listes,
+				]);
+			}else{
+				return $this->render('home/index.html.twig', [
+					'controller_name' => 'HomeController',
+					'listes' => $listes,
+					'listes_public' => $listespublic,
+				]);
+			}
 		}else{
 			return $this->render('home/index.html.twig', [
 				'controller_name' => 'HomeController',
 				'listes' => "",
+				'listes_public' => "",
 			]);
 		}
     }

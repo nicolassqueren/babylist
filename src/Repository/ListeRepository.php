@@ -21,19 +21,18 @@ class ListeRepository extends ServiceEntityRepository
         parent::__construct($registry, Liste::class);
     }
 
-//     /**
-//      * @return Liste[] Returns an array of Liste objects
-//      */
-//    public function findByOwnerId($value)
-//    {
-//        return $this->createQueryBuilder('owner_id')
-//            ->andWhere('owner_id = :val')
-//            ->setParameter('val', $value)
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+     /**
+      * @return Liste[] Returns an array of Liste objects
+      */
+    public function findPublicListes($value)
+    {
+        return $this->createQueryBuilder('listes')
+            ->andWhere('listes.is_Shared = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
 
     /*

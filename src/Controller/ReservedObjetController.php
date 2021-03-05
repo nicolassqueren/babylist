@@ -21,15 +21,17 @@ class ReservedObjetController extends AbstractController
 		$liste = $entityManager->getRepository(Liste::class)->find($id);
 		$objet = $entityManager->getRepository(Objet::class)->find($objetId);
 		$user = $this->getUser();
+		//Check if user is register !
 		if ($user){
 			$objet->setReservedBy($user);
 			$objet->setListe($liste);
 			$entityManager->persist($objet);
 			$entityManager->flush();
 			$this->addFlash('success','Merci pour votre reservation !');
-
-
 			return $this->redirectToRoute("shared_list", ["id"=>$liste->getId()]);
+		}else{
+			$this->addFlash('warning','Vous devez être enregistré avant de pouvoir réserver !');
+			return $this->redirectToRoute("app_register");
 		}
     }
 
@@ -48,8 +50,11 @@ class ReservedObjetController extends AbstractController
 			$entityManager->flush();
 			$this->addFlash('warning','Vous avez annuler votre réservation');
 
-
 			return $this->redirectToRoute("shared_list", ["id"=>$liste->getId()]);
+		}
+		else{
+			$this->addFlash('warning','Vous devez être enregistré avant de pouvoir réserver !');
+			return $this->redirectToRoute("app_register");
 		}
 	}
 }

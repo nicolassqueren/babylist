@@ -1,4 +1,12 @@
 /**HEADER**/
+/**
+colors :
+red : #DE3C4B
+blue primary : #2C758E
+blue secondary : #1C4C5C
+violet : #A499B3
+vert : #2BA6A4
+ */
 .header-nav{
 	background:#2c758e ;
 }
@@ -18,6 +26,55 @@ h1{
 }
 .logo{
 	color: white;
+}
+.alert.alert-success{
+	background: #2BA6A4 !important;
+	color: white !important;
+}
+.alert.alert-danger{
+	background: #DE3C4B !important;
+	color: white !important;
+}
+a{
+	text-decoration: none;
+	color: #2c758e;
+	font-weight: bold;
+}
+a:hover{
+	color: #1C4C5C;
+}
+a.warning{
+	text-decoration: none;
+	color: #DE3C4B;
+	font-weight: bold;
+}
+a.warning:hover{
+	color: #DE3C4B;
+}
+.liste_btn{
+	margin: 0;
+	padding: 15px;
+	text-align: center;
+	text-transform: uppercase;
+	transition: 0.5s;
+	background-size: 200% auto;
+	color: white;
+	border-radius: 10px;
+}
+.btn:hover {
+	background-position: right center; /* change the direction of the change here */
+}
+.btn_action {
+	background-image: linear-gradient(to right, #1C4C5C 0%, #2C758E 51%, #1C4C5C 100%);
+}
+.btn_warning{
+	background-image: linear-gradient(to right, #DE3C4B 0%, #DE3C4B 51%, #DE3C4B 100%);
+}
+.liste_btn a{
+	text-decoration: none;
+}
+.form-group{
+	margin: 1rem 0;
 }
 /**HOMEPAGE**/
 .home-bk{
@@ -84,6 +141,10 @@ img{
 .link_to_liste:hover .fas{
 	margin-left: 1rem;
 }
+/**LOGIN**/
+.login-block{
+	margin: 2rem auto;
+}
 /**LISTES**/
 .container-listes{
 	display: grid;
@@ -110,9 +171,49 @@ a.nav-link{
 	color: white !important;
 	text-decoration: none !important;
 }
+.edit_list,.info_shared_list{
+	margin-bottom: 1rem;
+}
+.block-public-listes{
+	margin-top: 2rem;
+}
+.listes_public{
+	margin: auto;
+}
+.listes_public .liste-item{
+	margin: 1rem;
+}
 /**FOOTER**/
 footer{
 	background:#2c758e ;
 	margin-top: 4rem;
 	padding: 2rem 1rem;
+}
+/** Page liste*/
+.container-liste{
+	position: relative;
+}
+.actions-liste{
+	position: absolute;
+	top: 10%;
+	right: 0;
+}
+.liste_link{
+	font-weight: bold;
+	color: #1C4C5C;
+}
+
+.shared_liste{
+	margin-top: 1rem;
+}
+.shared_liste p{
+	margin-bottom: 0;
+}
+
+.liste_btn a i.fas{
+	margin-right: 10px;
+}
+/** OBJET */
+.delivery{
+	max-width: 45px;
 }

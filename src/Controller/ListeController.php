@@ -46,10 +46,21 @@ class ListeController extends AbstractController
 		if ($user){
 			//TODO Ne récupérer que les listes de l'utilisateur OwnerId
 			$listes =$listesRepository->findByOwner($user);
-			return $this->render('listes/index.html.twig', [
-				'controller_name' => 'HomeController',
-				'listes' => $listes,
-			]);
+			if ($listes){
+				return $this->render('listes/index.html.twig', [
+					'controller_name' => 'HomeController',
+					'listes' => $listes,
+				]);
+			}else{
+				return $this->render('listes/index.html.twig', [
+					'controller_name' => 'HomeController',
+					'listes' => $listes,
+				]);
+			}
+
+		}else{
+			$this->addFlash('warning','Vous devez être enregistré avant de pouvoir réserver !');
+			return $this->redirectToRoute("app_register");
 		}
 	}
 

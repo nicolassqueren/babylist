@@ -3,20 +3,36 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
+	<div>
+		<img class="home-bk" src="{{ asset('/images/home-bk.jpg') }}"/>
+	</div>
     {% for flashError in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
-
-    <h1>Register</h1>
-
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.name) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+	<div class="container login-block col-md-6">
+		<h1>Créer votre compte</h1>
+		{{ form_start(registrationForm) }}
+			<div class="form-group ">
+				<div class="form-group ">
+					{{ form_row(registrationForm.name) }}
+				</div>
+				<div class="form-group ">
+					{{ form_row(registrationForm.email) }}
+				</div>
+				<div class="form-group ">
+					{{ form_row(registrationForm.plainPassword, {
+						label: 'Password'
+					}) }}
+				</div>
+				<div class="form-group">
+					 {{ form_row(registrationForm.agreeTerms) }}
+				</div>
+				<div class="form-group">
+					<button class="btn btn-lg liste_btn btn_action" type="submit">
+						Valider
+					</button>
+				</div>
+			</div>
+		{{ form_end(registrationForm) }}
+	</div>
 {% endblock %}

@@ -4,23 +4,8 @@
 
 
 {% block body %}
-
+{% if app.user %}
 	{% if  liste.isShared %}
-		{%  for message in app.flashes('success') %}
-			<div class="alert alert-success">
-				{{ message }}
-			</div>
-		{% endfor %}
-		{%  for message in app.flashes('error') %}
-			<div class="alert alert-danger">
-				{{ message }}
-			</div>
-		{% endfor %}
-		{%  for message in app.flashes('warning') %}
-			<div class="alert alert-warning">
-				{{ message }}
-			</div>
-		{% endfor %}
 		<div class="container-fluid">
 			<div class="container">
 				<h1>Voici la Liste de {{ liste.name }}</h1>
@@ -31,6 +16,7 @@
 				<ul>
 					<li>{{ liste.description }}</li>
 					<li>{{ liste.children }}</li>
+					<li>{{ liste.adresse }}</li>
 				</ul>
 			</div>
 		</div>
@@ -44,6 +30,7 @@
 					<th scope="col">link</th>
 					<th scope="col">state</th>
 					<th scope="col">brand</th>
+					<th scope="col">date</th>
 					<th scope="col">reservedBy</th>
 				</tr>
 				</thead>
@@ -56,15 +43,31 @@
 						<td><a href="{{ objet.link }}"> Le lien {{ objet.title }}</a></td>
 						<td>{{ objet.state }}</td>
 						<td>{{ objet.brand }}</td>
-						{#				{{TODO: Voir actions de réserver par un autre utilisateur}}#}
+						<td>
+							{% if objet.datechoice == "Avant la naissance" %}
+								<div><img class="delivery" src="{{ asset('/images/delivery.png') }}"/></div>
+								<div class="alert-danger">{{ objet.datechoice }}</div>
+							{% else %}
+								<div>{{ objet.datechoice }}</div>
+							{% endif %}
+
+						</td>
 						<td>
 							{% if  objet.reservedby %}
-								<div>Déja réserver !</div>
-								<a href="{{ path('objet_cancel_reserved', {id:liste.id, objetId: objet.id}) }}">Cancel Reservation</a>
+								{% if app.user.id == objet.reservedby.id %}
+									<div>Merci {{ app.user.name}} pour votre reservation <i class="fas fa-heart"></i> </div>
+									<a class="warning" href="{{ path('objet_cancel_reserved', {id:liste.id, objetId: objet.id}) }}">Annuler ma Reservation</a>
+								{% else %}
+									<button class="btn disabled btn-lg liste_btn btn_warning text-white" >
+										<a class="text-white" href="{{ path('objet_reserved', {id: liste.id, objetId: objet.id}) }}">
+											Déja réserver <i class="fas fa-heart"></i>
+										</a>
+									</button>
+								{% endif %}
 							{% else %}
-								<button class="btn btn-lg btn-primary text-white" >
+								<button class="btn btn-lg liste_btn btn_warning text-white" >
 									<a class="text-white" href="{{ path('objet_reserved', {id: liste.id, objetId: objet.id}) }}">
-										<i class="icon-edit icon-large">Je reserve </i>
+										Je reserve <i class="fas fa-heart"></i>
 									</a>
 								</button>
 							{% endif %}
@@ -92,5 +95,19 @@
 			</div>
 		</div>
 	{% endif %}
+{% else %}
+<img class="home-bk" src="{{ asset('/images/home-bk.jpg') }}"/>
+<div class="container-fluid" >
+	<div class="alert-danger text-center">Enregistrez vous pour accéder a cette liste, elle n'est pour l'instant inaccessible !</div>
+	<div class="container">
+		<div>{{ liste.name }}</div>
+		<div>{{ liste.description }}</div>
+		<div>{{ liste.children }}</div>
+		<button class="btn btn-lg btn_action text-white" >
+			<a class="text-white" href="{{ path('app_register') }}">Créer votre compte</a>
+		</button>
 
+	</div>
+</div>
+{% endif %}
 {% endblock %}
