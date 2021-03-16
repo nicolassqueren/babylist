@@ -1,0 +1,100 @@
+/** Page liste*/
+.container-liste{
+	position: relative;
+}
+.liste-item .card-body{
+	display: flex;
+	flex-direction: row;
+}
+.left_body_card{
+	flex: 2;
+}
+.actions-liste{
+	position: absolute;
+	top: 10%;
+	right: 0;
+}
+.shared_list{
+	margin-bottom: 1rem;
+}
+.card-body.shared{
+	display: block;
+}
+.block-liste-infos{
+	max-width: 60%;
+}
+.liste_link{
+	font-weight: bold;
+	color: #1C4C5C;
+}
+
+.shared_liste{
+	margin-top: 1rem;
+}
+.shared_liste p{
+	margin-bottom: 0;
+}
+
+.liste_btn a i.fas{
+	margin-right: 10px;
+}
+/** OBJET */
+.delivery{
+	max-width: 45px;
+	margin-right: 15px;
+}
+.title_garcon{
+	color: #2c758e;
+}
+.title_fille{
+	color: #CEABB1;
+}
+.container-objets_grid{
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	padding: 2rem 0;
+
+}
+.container-fluid.garcon{
+	background: #2c758e;
+	overflow: hidden;
+	padding-top: 2rem;
+}
+.infos_objets h2{
+	margin-bottom: 2rem;
+}
+.container-fluid.garcon .infos_objets h2, .container-fluid.fille .infos_objets h2,.container-fluid.garcon .infos_objets p {
+	color: white;
+}
+.container-fluid.fille{
+	background: #CEABB1;
+	overflow: hidden;
+	padding-top: 2rem;
+}
+.objet-item{
+	margin: 1rem;
+	border-radius: 15px;
+	color: #444444;
+}
+.card-img-top{
+	max-width: 60%;
+	margin: auto;
+}
+.card-text.description{
+	font-size: 0.8rem;
+}
+.card-actions{
+	background-color: #e3d4d9;
+	border-radius: 0 0 15px 15px;
+	text-align: center;
+}
+.card-body p span.label{
+	font-style: italic;
+	font-size: 0.8rem;
+}
+.card-body .alert-danger{
+	display: flex;
+    flex-direction: row;
+    align-items: center;
+	padding: 0.2rem;
+}

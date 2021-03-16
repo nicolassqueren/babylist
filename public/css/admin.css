@@ -1,0 +1,11 @@
+body{
+
+}
+.home-bk{
+	max-width: 100%;
+}
+.main-sidebar{
+	grid-row: 2;
+	grid-column: 1;
+	width: auto;
+}

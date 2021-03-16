@@ -1,0 +1,79 @@
+{% block html %}
+
+
+	<table valign="top" align="center" style="font-family:Arial,sans-serif; text-align:left; padding-top:15px; padding-bottom:15px; font-size:15px; line-height:1.5;" border="0" cellpadding="0" cellspacing="0" width="100%" id="email-body">
+		<tr>
+			<td style="padding:0 !important;  margin:0;">
+				<p class="intro-text" style="font-size:.5em; text-align:center; margin:0">A message from MyBabyListe</p>
+			</td>
+		</tr>
+		<tr>
+			<td align="center" valign="top" style="padding:0 !important;">
+				<table id="email-body-content" style="border:none; background:#fff; border-collapse: collapse; width:600px;" width="600px" cellpadding="0" cellspacing="0" align="center">
+					<tbody>
+
+					<tr>
+						<td align="center" width="100%"><img style="padding:25px 15px 15px; margin:0; width:400px;" src="{{ email.image('@images/email/listebk.jpg') }}"  /></td>
+					</tr>
+					<tr>
+						<td style="padding:15px 25px; text-align:center; margin:0 0 0 0; background-color:#2c758e; color:#fff; font-size:18px">
+							<p style="margin:0; padding:0;" id="publication">Hey {{ user.name }} !</p>
+						</td>
+					</tr>
+					<tr >
+						<td style="padding:15px 15px 35px 15px;font-size:15px;vertical-align:top">
+							<h1 style="font-size:20px;">Merci pour votre réservation !</h1>
+							<p>Cette réservation à été faite pour la liste : <strong style="color: #2c758e">{{ liste.name }}</strong></p>
+							<p>Voici le lien de la liste : 	<a href="{{ liste.sharedurl }}">Lien de la liste</a> </p>
+							<p>La famille <strong style="color: #2c758e">{{ liste.famille }}</strong> vous remercie !</p>
+							<p>{{ liste.adresse }}</p>
+							{% if objet %}
+							<div style="border-top: 1px solid #2c758e;margin-top: 30px">
+								<p>{{ objet.title }}</p>
+								<p>{{ objet.description }}</p>
+								<p><a href="{{ objet.link }}"> Le lien {{ objet.title }}</a></p>
+								<p>{{ objet.state }}</p>
+								<p>{{ objet.brand }}</p>
+								{% if objet.datechoice == "Avant la naissance" %}
+									<p style="color:#DE3C4B ">N'oubliez pas cet objet est à envoyer au domicile de la famille avant la naissance.</p>
+									<p style="display: flex;flex-direction:row;align-items: center;">
+									<img style="width:50px;" src="{{ email.image('@images/email/delivery.png') }}" alt=""/>
+									<span style="margin-left: 15px;">{{ objet.datechoice }}</span>
+									</p>
+								{% else %}
+									<p>{{ objet.datechoice }}</p>
+								{% endif %}
+							</div>
+							{% else %}
+								<div>
+									<h2>no records found</h2>
+								</div>
+							{% endif %}
+						</td>
+					</tr>
+					<tr bgcolor="#f5f5f5">
+						<td style="padding:25px 20px;" align="center"><a style="color:#78797a;" href="http://www.uwlax.edu/" class="site-link">www.mybabyliste.fr<span></span></a></td>
+					</tr>
+
+					</tbody>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center; font-size:10px;">
+				<p style="margin:0; ">&nbsp;</p>
+				<p style="margin:0"><a class="unsubscribe-link" style="color:#969799; text-decoration:none;" href="#"><span style="color:#969799; text-decoration:none; font-family: tahoma, helvetica,sans-serif;">Ce message provient de</span></a>  mybabyliste.fr</p>
+			</td>
+		</tr>
+	</table>
+{% endblock %}
+
+{#{% block text %}#}
+
+{#{% endblock %}#}
+
+{#{% block subject %}{% endblock %}#}
+
+{#{% block config %}#}
+{#  {% do email.attach('@images/company_logo.png') %}#}
+{#{% endblock %}#}

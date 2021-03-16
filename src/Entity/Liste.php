@@ -70,6 +70,16 @@ class Liste
      */
     private $adresse;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $famille;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $genre;
+
     public function __construct()
     {
         $this->objets = new ArrayCollection();
@@ -214,6 +224,35 @@ class Liste
     public function setAdresse(?string $adresse): self
     {
         $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    public function getFamille(): ?string
+    {
+        return $this->famille;
+    }
+
+    public function setFamille(string $famille): self
+    {
+        $this->famille = $famille;
+
+        return $this;
+    }
+
+	public function __toString()
+         	{
+         		return $this->name;
+         	}
+
+    public function getGenre(): ?string
+    {
+        return $this->genre;
+    }
+
+    public function setGenre(string $genre): self
+    {
+        $this->genre = $genre;
 
         return $this;
     }

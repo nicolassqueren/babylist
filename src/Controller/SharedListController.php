@@ -5,9 +5,12 @@ namespace App\Controller;
 use App\Entity\Liste;
 use App\Repository\ObjetRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 class SharedListController extends AbstractController
@@ -38,7 +41,8 @@ class SharedListController extends AbstractController
 	 * @param Request $request
 	 * @return Response
 	 */
-	public function shared (EntityManagerInterface $entityManager, $id, Request $request) :Response{
+	public function shared (EntityManagerInterface $entityManager, $id, Request $request, MailerInterface $mailer) :Response{
+
 		/** @var Liste $liste */
 		$liste = $entityManager->getRepository(Liste::class)->find($id);
 		//Set shared liste by user
@@ -51,7 +55,7 @@ class SharedListController extends AbstractController
 		$entityManager->persist($liste);
 		$entityManager->flush();
 
-		$this->addFlash('success','Congrats you shared your Liste !');
+		$this->addFlash('success','Félicitations vous venez de partager votre liste !');
 
 		return $this->redirectToRoute("shared_list", ["id"=>$liste->getId()]);
 	}
@@ -63,15 +67,27 @@ class SharedListController extends AbstractController
 	 * @param Request $request
 	 * @return Response
 	 */
-	public function closeList (EntityManagerInterface $entityManager, $id, Request $request) :Response{
+	public function closeList (EntityManagerInterface $entityManager, $id, Request $request, MailerInterface $mailer,  ObjetRepository $objetRepository) :Response{
+		$user = $this->getUser();
 		/** @var Liste $liste */
 		$liste = $entityManager->getRepository(Liste::class)->find($id);
 		$liste->setIsShared(false);
 		$entityManager->persist($liste);
 		$entityManager->flush();
+		$this->addFlash('error','Vous venez de clore votre liste ! Félicitations :) ! Un email viens de vous être envoyé pour le récapitulatif');
+		//Send mail too user for close liste action
+		$email = (new TemplatedEmail())
+			->from('nicosqueren@gmail.com')
+			->to($user->getEmail())
+			->subject('Fermeture de votre liste !')
+			->htmlTemplate('emails/close_liste.html.twig')
+			->context([
+				'user' => $user,
+				'liste' => $liste,
+				'objets' => $objetRepository->findByListe($liste),
+			]);
 
-		$this->addFlash('error','Warning you Closed your Liste !');
-
+		$mailer->send($email);
 		return $this->redirectToRoute("liste", ["id"=>$liste->getId()]);
 	}
 

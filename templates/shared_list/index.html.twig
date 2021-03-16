@@ -6,80 +6,105 @@
 {% block body %}
 {% if app.user %}
 	{% if  liste.isShared %}
+<section class="parallax" data-url="/V3/images/parallax2_opt.jpg" data-mobile="true" data-speed="0.7" data-direction="inverse">
+	<div class="parallax_image" style="background-image: url({{ asset('/images/listebk.jpg') }})"></div>
 		<div class="container-fluid">
-			<div class="container">
-				<h1>Voici la Liste de {{ liste.name }}</h1>
+			<div class="container container-liste">
+				<div class="container">
+					{% if liste.genre == "garcon" %}
+						<h1 class="title_garcon">Voici la Liste {{ liste.name }}</h1>
+					{% else %}
+						<h1 class="title_fille">Voici la Liste {{ liste.name }}</h1>
+					{% endif %}
+				</div>
+				<div class="container-fluid">
+					<div class="container">
+						<p>{{ liste.description }}</p>
+						<p><i class="fas fa-baby"></i> {{ liste.children }}</p>
+						<p><i class="fas fa-house-user"></i></i> {{ liste.famille }}</p>
+						<p><i class="fas fa-shipping-fast"></i> {{ liste.adresse }}</p>
+						<p><i class="fas fa-calendar-check"></i> {{ liste.enddate|date("m/d/Y") }}</p>
+					</div>
+				</div>
 			</div>
 		</div>
-		<div class="container-fluid">
-			<div class="container">
-				<ul>
-					<li>{{ liste.description }}</li>
-					<li>{{ liste.children }}</li>
-					<li>{{ liste.adresse }}</li>
-				</ul>
+</section>
+		{% if liste.genre == "garcon" %}
+		<div class="container-fluid garcon">
+		{% else %}
+		<div class="container-fluid fille">
+		{% endif %}
+			<div class="container infos_objets">
+				<h2 class="text-center">Réserver les objets de votre choix</h2>
+				<div class="row">
+					<div class="col-md-4">
+						<p><i class="fas fa-hand-holding-heart"></i> Vous pouvez dès à présent réserver un objet de la liste pour l'offrir a vos proches.</p>
+					</div>
+					<div class="col-md-4">
+						<p><i class="fas fa-envelope-open-text"></i> Un email vous sera envoyé avec tous les détails de l'objet pour vous faciliter la vie.</p>
+					</div>
+					<div class="col-md-4">
+						<p><i class="fas fa-shipping-fast"></i> Nous vous invitons à être vigilent sur la date d'envoi de l'objet avant ou après la naissance.</p>
+					</div>
+				</div>
 			</div>
-		</div>
-		<div class="container-fluid container-objets">
-			<table class="table">
-				<thead>
-				<tr>
-					<th style="width: 20%"  scope="col">image</th>
-					<th scope="col">title</th>
-					<th style="width: 20%" scope="col">description</th>
-					<th scope="col">link</th>
-					<th scope="col">state</th>
-					<th scope="col">brand</th>
-					<th scope="col">date</th>
-					<th scope="col">reservedBy</th>
-				</tr>
-				</thead>
-				{% for objet in objets %}
-					<tbody>
-					<tr>
-						<td><img class="img-objet" src="{{ asset('' ~ objet.image) }}"/></td>
-						<td>{{ objet.title }}</td>
-						<td >{{ objet.description }}</td>
-						<td><a href="{{ objet.link }}"> Le lien {{ objet.title }}</a></td>
-						<td>{{ objet.state }}</td>
-						<td>{{ objet.brand }}</td>
-						<td>
-							{% if objet.datechoice == "Avant la naissance" %}
-								<div><img class="delivery" src="{{ asset('/images/delivery.png') }}"/></div>
-								<div class="alert-danger">{{ objet.datechoice }}</div>
-							{% else %}
-								<div>{{ objet.datechoice }}</div>
+			<div class="container-fluid container-objets_grid">
+			{% for objet in objets %}
+				<div class="card objet-item">
+					<img class="card-img-top"src="{{ asset('' ~ objet.image) }}" alt="Card image cap">
+					<div class="card-body">
+						<h5 class="card-title">{{ objet.title }}</h5>
+						<p class="card-text description">
+							{{ objet.description }}
+						</p>
+						<p>
+							{% if objet.link %}
+								<a class="objet_link" href="{{ objet.link }}" target="_blank">
+									{{ objet.title }}
+									<i class="fas fa-external-link-alt"></i>
+								</a>
 							{% endif %}
-
-						</td>
-						<td>
-							{% if  objet.reservedby %}
-								{% if app.user.id == objet.reservedby.id %}
-									<div>Merci {{ app.user.name}} pour votre reservation <i class="fas fa-heart"></i> </div>
-									<a class="warning" href="{{ path('objet_cancel_reserved', {id:liste.id, objetId: objet.id}) }}">Annuler ma Reservation</a>
-								{% else %}
-									<button class="btn disabled btn-lg liste_btn btn_warning text-white" >
-										<a class="text-white" href="{{ path('objet_reserved', {id: liste.id, objetId: objet.id}) }}">
-											Déja réserver <i class="fas fa-heart"></i>
-										</a>
-									</button>
-								{% endif %}
+						</p>
+						<p><span class="label">Etat : </span>{{ objet.state }}</p>
+						<p><span class="label">Marque : </span>{{ objet.brand }}</p>
+						<p>
+							{% if objet.datechoice == "Avant la naissance" %}
+						<div class="alert-danger">
+							<img class="delivery" src="{{ asset('/images/delivery.png') }}"/>
+							{{ objet.datechoice }}
+						</div>
+						{% else %}
+							<div>{{ objet.datechoice }}</div>
+						{% endif %}
+						</p>
+					</div>
+					<div class="card-body card-actions">
+						{% if  objet.reservedby %}
+							{% if app.user.id == objet.reservedby.id %}
+								<div><i class="fas fa-heart"></i> Merci {{ app.user.name}} pour votre reservation  </div>
+								<div><a class="warning" href="{{ path('objet_cancel_reserved', {id:liste.id, objetId: objet.id}) }}">Annuler ma Reservation</a></div>
 							{% else %}
-								<button class="btn btn-lg liste_btn btn_warning text-white" >
+								<button class="btn disabled btn-lg liste_btn btn_warning text-white" >
 									<a class="text-white" href="{{ path('objet_reserved', {id: liste.id, objetId: objet.id}) }}">
-										Je reserve <i class="fas fa-heart"></i>
+										Déja réserver <i class="fas fa-heart"></i>
 									</a>
 								</button>
 							{% endif %}
-						</td>
-					</tr>
-					</tbody>
-				{% else %}
-					<div>
-						<h2>no records found</h2>
+						{% else %}
+							<button class="btn btn-lg liste_btn btn_warning text-white" >
+								<a class="text-white" href="{{ path('objet_reserved', {id: liste.id, objetId: objet.id}) }}">
+									Je reserve <i class="fas fa-heart"></i>
+								</a>
+							</button>
+						{% endif %}
 					</div>
-				{% endfor %}
-			</table>
+				</div>
+			{% else %}
+				<div>
+					<h2>no records found</h2>
+				</div>
+			{% endfor %}
+			</div>
 		</div>
 	{% else %}
 		<div class="container-fluid">

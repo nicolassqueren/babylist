@@ -1,0 +1,24 @@
+{# @var ea \EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext #}
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block page_title 'Welcome to EasyAdmin 3' %}
+
+{% block page_content %}
+	<div>
+		<img class="home-bk" src="{{ asset('/images/home-bk.jpg') }}"/>
+	</div>
+    <p>
+        <strong>You have successfully installed EasyAdmin 3 in your application!</strong>
+    </p>
+
+    <p>
+        You are seeing this example page because you haven't configured the start page
+        of your Dashboard. To do that, open the following file in your editor:
+    </p>
+
+    <pre>{{ dashboard_controller_filepath }}</pre>
+
+    <p>
+        Then, add the following method to it to customize the Dashboard start page:
+    </p>
+{% endblock %}

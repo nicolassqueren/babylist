@@ -45,20 +45,20 @@ class CreateListeController extends AbstractController
 					}
 					//Get user for liste and set Owner_id
 					$liste->setOwner( $this->getUser());
+					$liste->setIsShared(0);
 					$entityManager->persist($liste);
 					$entityManager->flush();
 					return $this->redirectToRoute("liste", ["id"=>$liste->getId()]);
 				}else{
 					dump('Not valid Malin');
 				}
-
-
 			}
 		}else{
-			echo "Redirect to another route";
+			$this->addFlash('warning','Vous devez être enregistré avant de pouvoir Créer votre liste !');
+			return $this->redirectToRoute("app_register");
 		}
-        return $this->render('create_liste/index.html.twig', [
-            'listeform' => $listeForm->createView()
-        ]);
+		return $this->render('create_liste/index.html.twig', [
+			'listeform' => $listeForm->createView()
+		]);
     }
 }

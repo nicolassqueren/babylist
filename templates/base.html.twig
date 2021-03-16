@@ -12,6 +12,9 @@
 			<link rel="preconnect" href="https://fonts.gstatic.com">
 			<link href="https://fonts.googleapis.com/css2?family=Lobster&family=Montserrat:wght@700&display=swap" rel="stylesheet">
 			<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+			<link rel="stylesheet" href="{{ asset('css/homepage.css') }}">
+			<link rel="stylesheet" href="{{ asset('css/liste.css') }}">
+			<link rel="stylesheet" href="{{ asset('css/objets.css') }}">
 		{% endblock %}
 
 		{% block javascripts %}
@@ -22,6 +25,7 @@
 			integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 			crossorigin="anonymous"></script>
 			<script src="{{ asset('js/animation.js') }}"></script>
+			<script src="{{ asset('js/parallax.js') }}"></script>
 		{% endblock %}
     </head>
     <body>
@@ -36,7 +40,14 @@
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						{% if app.user %}
 							<li class="nav-item">
-								<a class="nav-link active" aria-current="page" href="{{ path('listes') }}" >Mes listes</a>
+								<a class="nav-link active" aria-current="page" href="{{ path('listes') }}" > <i class="fas fa-clipboard-list"></i> Mes listes</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" href="{{ path('shared_listes') }}" > <i class="fas fa-heart"></i> Les listes partagées</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link"href="{{ path('search_listes') }}"><i class="fas fa-search"></i> Trouvez une liste</a>
+
 							</li>
 						{% else %}
 							<li class="nav-item">
@@ -48,11 +59,15 @@
 							<li class="nav-item">
 								<a class="nav-link"href="{{ path('app_login') }}">Login</a>
 							</li>
+							<li class="nav-item">
+								<a class="nav-link"href="{{ path('search_listes') }}">	<i class="fas fa-search"></i> Trouvez une liste</a>
+
+							</li>
 						{% endif %}
 
 						<li class="nav-item">
 
-							<a class="nav-link" href="{{ path('create_liste') }}">Create List</a>
+							<a class="nav-link" href="{{ path('create_liste') }}"> <i class="far fa-plus-square"></i> Créer ma liste</a>
 						</li>
 					</ul>
 				</div>

@@ -1,0 +1,95 @@
+/**LISTES**/
+.container-listes{
+	display: grid;
+	grid-template-columns: repeat(1, 2fr);
+	grid-gap: 40px;
+	grid-auto-flow: row dense;
+}
+.liste-item{
+	border-radius: 15px;
+	box-shadow: 0 2px 3px #dadada;
+
+	display: flex;
+	flex-direction: row;
+	position: relative;
+}
+.liste-item.garcon{
+	background-color: #BCDBE3;
+	color: #2c758e;
+}
+.liste-item.fille{
+	background-color: #e3d4d9;
+	color: #2c758e;
+}
+.liste-item .card-img-top{
+	border-radius: 15px;
+	max-width: 30%;
+}
+.card-body.shared .shared_liste a{
+	color: #1C4C5C;
+}
+.img-objet{
+	max-width: 35%;
+}
+.liste-item .card-body{
+	position: relative;
+}
+a.nav-link{
+	color: white !important;
+	text-decoration: none !important;
+}
+.edit_list,.info_shared_list{
+	margin-bottom: 1rem;
+}
+.block-public-listes{
+	margin-top: 2rem;
+}
+.block-public-listes .container h2{
+	color: white;
+}
+.listes_public{
+	margin: auto;
+}
+.listes_public .liste-item{
+	margin: 1rem;
+}
+.parallax {
+	position: relative;
+	overflow: hidden;
+	min-height: 500px;
+}
+.parallax_image {
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+	background-size: cover;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 100%;
+	background-position: center center;
+	will-change: transform;
+}
+.parallax_cnt {
+	position: relative;
+	padding-top: 16px;
+	padding-bottom: 16px;
+}
+.border-add__mod{
+	border-color: #fff;
+	padding-top: 36px;
+	padding-right: 10px;
+}
+.blockquote1 q, .blockquote1 cite {
+	font-size: 30px;
+	line-height: 34px;
+}
+.blockquote1 .liste_btn{
+	margin-top: 2rem;
+}
+.card_famille{
+	position: absolute;
+    top: 5%;
+    right: 5%;
+	color: #DE3C4B ;
+}

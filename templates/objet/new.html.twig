@@ -4,15 +4,47 @@
 
 {% block body %}
 	<div class="container-fluid">
-		{{ form_errors(objetform) }}
-		{{ form_start(objetform) }}
-
-		{{ form_label(objetform.title) }}
-		</br>
-		{{ form_widget(objetform.title) }}
-		{{ form_errors(objetform.title) }}
-
-		{{ form_widget(objetform.Envoyer) }}
+		<div class="container">
+			<h1 class="text-center">Ajouter un objet à votre liste</h1>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="container ">
+			{{ form_errors(objetform) }}
+			{{ form_start(objetform) }}
+			<div class="row">
+				<div class="col">
+					{{ form_row(objetform.title) }}
+					{{ form_errors(objetform.title) }}
+				</div>
+				<div class="col">
+					{{ form_row(objetform.brand) }}
+				</div>
+			</div>
+			<div class="form-group ">
+				{{ form_row(objetform.description) }}
+				{{ form_errors(objetform.description) }}
+			</div>
+			<div class="row">
+				<div class="col">
+					{{ form_row(objetform.link) }}
+				</div>
+				<div class="col">
+					{{ form_row(objetform.state) }}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					{{ form_row(objetform.datechoice) }}
+				</div>
+				<div class="col">
+					{{ form_row(objetform.image_file) }}
+				</div>
+			</div>
+			<div class="form-group">
+				{{ form_row(objetform.Envoyer) }}
+			</div>
+		</div>
 		{{ form_end(objetform) }}
 	</div>
 {% endblock %}

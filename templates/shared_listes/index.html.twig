@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SharedListesController!{% endblock %}
+
+{% block body %}
+<div>
+	<img class="home-bk" src="{{ asset('/images/home-bk.jpg') }}"/>
+	<h1 class="text-center">Les listes partagées !</h1>
+</div>
+<div class="container-fluid">
+	{% if listes_public %}
+		<div class="container col-md-6 listes_public row">
+			{% for liste in listes_public %}
+				{% if  liste.isShared %}
+					{% if liste.genre == "garcon" %}
+					<div class="card liste-item col-md-12 fille">
+						<img class="card-img-top" src="{{ asset('' ~ liste.image) }}" alt="Card image {{ liste.name }}">
+						<div class="card-body shared">
+							<h5 class="card-title">{{ liste.name }}</h5>
+							<p class="card-text"> <i class="fas fa-baby"></i> {{ liste.children }}</p>
+							<p class="card-text">{{ liste.description }}</p>
+							<div class="shared_liste">
+								<a class="" href="{{ liste.sharedurl }}">Voir la liste de {{ liste.owner.name }} <i class="fas fa-arrow-right"></i></a>
+							</div>
+							<span class="card_famille"><i class="fas fa-house-user"></i> {{ liste.famille }} </span>
+						</div>
+					</div>
+					{% else %}
+						<div class="card liste-item col-md-12 garcon">
+							<img class="card-img-top" src="{{ asset('' ~ liste.image) }}" alt="Card image {{ liste.name }}">
+							<div class="card-body shared">
+								<h5 class="card-title">{{ liste.name }}</h5>
+								<p class="card-text"> <i class="fas fa-baby"></i> {{ liste.children }}</p>
+								<p class="card-text">{{ liste.description }}</p>
+								<div class="shared_liste">
+									<a class="" href="{{ liste.sharedurl }}">Voir la liste de {{ liste.owner.name }} <i class="fas fa-arrow-right"></i></a>
+								</div>
+								<span class="card_famille"><i class="fas fa-house-user"></i> {{ liste.famille }} </span>
+							</div>
+						</div>
+					{% endif %}
+				{% endif %}
+			{% endfor %}
+		</div>
+	{% else %}
+		<div class="container-fluid">
+			<div class="container access_home ">
+				<div class="row">
+					<div class="col-md-6 create">
+						<h2>Créer votre compte</h2>
+						<button class="btn btn-lg btn_action text-white" >
+							<a class="text-white" href="{{ path('app_register') }}">Créer votre compte</a>
+						</button>
+					</div>
+					<div class="col-md-6 register">
+						<h2>Connecter vous !</h2>
+						<button class="btn btn-lg btn_action text-white" >
+							<a class="text-white" href="{{ path('app_login') }}">Connexion</a>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endif %}
+</div>
+{% endblock %}

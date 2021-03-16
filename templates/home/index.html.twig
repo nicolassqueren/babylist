@@ -4,9 +4,7 @@
 
 {% block body %}
 	<div>
-
 		<img class="home-bk" src="{{ asset('/images/home-bk.jpg') }}"/>
-		<h1 class="text-center">BABY LIST</h1>
 	</div>
 	<div class="container-fluid">
 		<div class="row container_info_liste">
@@ -27,65 +25,282 @@
 				<div class="info_liste four" >4. Recevez vos cadeaux</div>
 			</div>
 		</div>
+		<section class="parallax" data-url="/V3/images/parallax2_opt.jpg" data-mobile="true" data-speed="0.7" data-direction="inverse">
+			<div class="parallax_image" style="background-image: url({{ asset('/images/parallax2_opt.jpg') }})";>
+			</div>
+			<div class="parallax_cnt">
+				<div class="container">
+					<div class="row">
+						<blockquote class="blockquote1 row center767">
+							<div class="col-md-7">
+
+							</div>
+							<div class="col-md-5 border-add border-add__mod">
+								<h2>Babylist facilitez vous la vie !</h2>
+								<q style="color: #474747;">En créant une liste de naissance, vous facilitez la tâche à vos proches et profitez au maximum de vos cadeaux.
+								</q>
+							</div>
+						</blockquote>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
 		{% if listes %}
+			<div class="listes_home">
 			<div class="container user_container_listes">
 				<h2>Vos listes </h2>
-				<div class="container-listes">
+				<div class=" container container-listes">
 					{% for liste in listes %}
-						<div class="card liste-item" >
+						{% if liste.genre == "garcon" %}
+							<div class="card liste-item garcon" >
 							<img class="card-img-top" src="{{ asset('' ~ liste.image) }}" alt="Card image {{ liste.name }}">
 							<div class="card-body">
-								<h5 class="card-title">{{ liste.name }}</h5>
-								<p class="card-text">{{ liste.children }}</p>
-								<p class="card-text">{{ liste.description }}</p>
-								<a class="link_to_liste" href="{{ path('liste', {id:liste.id}) }}">Got to {{ liste.name }}<i class="fas fa-angle-right"></i></a>
+								<div class="left_body_card">
+									<h5 class="card-title">{{ liste.name }}</h5>
+									<p class="card-text">{{ liste.famille }}</p>
+									<p class="card-text">{{ liste.children }}</p>
+									<p class="card-text">{{ liste.description }}</p>
+								</div>
+								<div class="right_body_card">
+									{% if  liste.isShared %}
+										<div class="shared_list">
+											<p>Votre liste est déja partagée !</p>
+											<button class="btn btn-lg liste_btn btn_warning text-white" >
+												<a class="text-white" href="{{ path('liste_close', {id: liste.id}) }}">
+													<i class="fas fa-times-circle"></i>Fermer ma liste</i>
+												</a>
+											</button>
+											<div class="shared_liste">
+												<p>Voici le lien : </p>
+												<p>{{ liste.sharedurl }}</p>
+											</div>
+											<a class="text-white" href="{{ liste.sharedurl }}">Voir votre liste <i class="fas fa-arrow-right"></i></a>
+										</div>
+										<div class="edit_list">
+											<button class="btn btn-lg btn_action text-white" >
+												<a class="text-white" href="{{ path('liste', {id: liste.id}) }}">
+													<i class="fas fa-cart-plus">	Ajouter des objets </i>
+												</a>
+											</button>
+										</div>
+										<div class="edit_list">
+											<button class="btn btn-lg btn_action text-white" >
+												<a class="text-white" href="{{ path('liste_edit', {id: liste.id}) }}">
+													<i class="icon-edit icon-large">	Modifier </i>
+												</a>
+											</button>
+										</div>
+									{% else %}
+										<div class="shared_list">
+											<p>Il est temps de partager votre liste</p>
+											<button id="shared" class="btn btn-lg  liste_btn btn_action text-white" >
+												<a class="text-white" href="{{ path('liste_shared', {id: liste.id}) }}">
+													<i class="fas fa-share-alt"></i>Partager ma liste</i>
+												</a>
+											</button>
+										</div>
+										<div class="edit_list">
+											<button class="btn btn-lg btn_action text-white" >
+												<a class="text-white" href="{{ path('liste_edit', {id: liste.id}) }}">
+													<i class="icon-edit icon-large">	Modifier </i>
+												</a>
+											</button>
+										</div>
+										<div class="edit_list">
+											<button class="btn btn-lg btn_action text-white" >
+												<a class="text-white" href="{{ path('liste', {id: liste.id}) }}">
+													<i class="fas fa-cart-plus">	Ajouter des objets </i>
+												</a>
+											</button>
+										</div>
+									{% endif %}
+									<div class="delet-liste">
+										<button type="button" class="btn btn_warning px-3">
+											<a class="text-white" href="{{ path('liste_delete', {id: liste.id}) }}">
+												<i class="icon-trash"></i>
+											</a>
+										</button>
+									</div>
+								</div>
+
 							</div>
 						</div>
-					{% else %}
-						<div>
-							<h2>Vous pouvez créer Vous aussi votre Liste</h2>
-							<div class="container">
-								<button>
-									<a href="{{ path('create_liste') }}">Create Liste</a>
-								</button>
+						{% else %}
+							{% if liste.genre == "garcon" %}
+								<div class="card liste-item garcon" >
+							{% else %}
+								<div class="card liste-item fille" >
+							{% endif %}
+								<img class="card-img-top" src="{{ asset('' ~ liste.image) }}" alt="Card image {{ liste.name }}">
+								<div class="card-body">
+									<div class="left_body_card">
+										<h5 class="card-title">{{ liste.name }}</h5>
+										<p class="card-text">{{ liste.famille }}</p>
+										<p class="card-text">{{ liste.children }}</p>
+										<p class="card-text">{{ liste.description }}</p>
+									</div>
+									<div class="right_body_card">
+										{% if  liste.isShared %}
+											<div class="shared_list">
+												<p>Votre liste est déja partagée !</p>
+												<button class="btn btn-lg liste_btn btn_warning text-white" >
+													<a class="text-white" href="{{ path('liste_close', {id: liste.id}) }}">
+														<i class="fas fa-times-circle"></i>Fermer ma liste</i>
+													</a>
+												</button>
+												<div class="shared_liste">
+													<p>Voici le lien : </p>
+													<p>{{ liste.sharedurl }}</p>
+												</div>
+												<a class="text-white" href="{{ liste.sharedurl }}">Voir votre liste <i class="fas fa-arrow-right"></i></a>
+											</div>
+											<div class="edit_list">
+												<button class="btn btn-lg btn_action text-white" >
+													<a class="text-white" href="{{ path('liste', {id: liste.id}) }}">
+														<i class="fas fa-cart-plus">	Ajouter des objets </i>
+													</a>
+												</button>
+											</div>
+											<div class="edit_list">
+												<button class="btn btn-lg btn_action text-white" >
+													<a class="text-white" href="{{ path('liste_edit', {id: liste.id}) }}">
+														<i class="icon-edit icon-large">	Modifier </i>
+													</a>
+												</button>
+											</div>
+										{% else %}
+											<div class="shared_list">
+												<p>Il est temps de partager votre liste</p>
+												<button id="shared" class="btn btn-lg  liste_btn btn_action text-white" >
+													<a class="text-white" href="{{ path('liste_shared', {id: liste.id}) }}">
+														<i class="fas fa-share-alt"></i>Partager ma liste</i>
+													</a>
+												</button>
+											</div>
+											<div class="edit_list">
+												<button class="btn btn-lg btn_action text-white" >
+													<a class="text-white" href="{{ path('liste_edit', {id: liste.id}) }}">
+														<i class="icon-edit icon-large">	Modifier </i>
+													</a>
+												</button>
+											</div>
+											<div class="edit_list">
+												<button class="btn btn-lg btn_action text-white" >
+													<a class="text-white" href="{{ path('liste', {id: liste.id}) }}">
+														<i class="fas fa-cart-plus">	Ajouter des objets </i>
+													</a>
+												</button>
+											</div>
+										{% endif %}
+										<div class="delet-liste">
+											<button type="button" class="btn btn_warning px-3">
+												<a class="text-white" href="{{ path('liste_delete', {id: liste.id}) }}">
+													<i class="icon-trash"></i>
+												</a>
+											</button>
+										</div>
+									</div>
+
+								</div>
 							</div>
-						</div>
+						{% endif %}
 					{% endfor %}
 				</div>
 			</div>
 		{% else %}
 			{% if listes_public %}
 				<div class="container-fluid block-public-listes">
-					<div class="container">
-						<h2 class="text-center">Les listes accessibles</h2>
-					</div>
-				</div>
-				<div class="container col-md-6 listes_public row">
-					{% for liste in listes_public %}
-						{% if  liste.isShared %}
-							<div class="card liste-item col-md-12 ">
-								<img class="card-img-top" src="{{ asset('' ~ liste.image) }}" alt="Card image {{ liste.name }}">
-								<div class="card-body">
-									<h5 class="card-title">{{ liste.name }}</h5>
-									<p class="card-text">{{ liste.children }}</p>
-									<p class="card-text">{{ liste.description }}</p>
-									<div class="shared_liste">
-										<a class="text-white" href="{{ liste.sharedurl }}">Voir la liste de {{ liste.owner.name }} <i class="fas fa-arrow-right"></i></a>
-									</div>
-								</div>
+							<div class="container">
+								<h2 class="text-center">Les listes accessibles</h2>
 							</div>
-						{% endif %}
-					{% endfor %}
+
+						<div class="container col-md-6 listes_public row">
+							{% for liste in listes_public %}
+								{% if  liste.isShared %}
+									{% if liste.genre == "garcon" %}
+										<div class="card liste-item col-md-12 garcon ">
+											<img class="card-img-top" src="{{ asset('' ~ liste.image) }}" alt="Card image {{ liste.name }}">
+											<div class="card-body shared">
+												<h5 class="card-title">{{ liste.name }}</h5>
+												<p class="card-text">{{ liste.children }}</p>
+												<p class="card-text">{{ liste.description }}</p>
+												<div class="shared_liste">
+													<a class="" href="{{ liste.sharedurl }}">Voir la liste de {{ liste.owner.name }} <i class="fas fa-arrow-right"></i></a>
+												</div>
+											</div>
+											<span class="card_famille"><i class="fas fa-house-user"></i> {{ liste.famille }} </span>
+										</div>
+									{% else %}
+										<div class="card liste-item col-md-12 fille ">
+											<img class="card-img-top" src="{{ asset('' ~ liste.image) }}" alt="Card image {{ liste.name }}">
+											<div class="card-body shared">
+												<h5 class="card-title">{{ liste.name }}</h5>
+												<p class="card-text">{{ liste.children }}</p>
+												<p class="card-text">{{ liste.description }}</p>
+												<div class="shared_liste">
+													<a class="" href="{{ liste.sharedurl }}">Voir la liste de {{ liste.owner.name }} <i class="fas fa-arrow-right"></i></a>
+												</div>
+											</div>
+											<span class="card_famille"><i class="fas fa-house-user"></i> {{ liste.famille }} </span>
+										</div>
+									{% endif %}
+								{% endif %}
+							{% endfor %}
+						</div>
+					</div>
 				</div>
 			{% else %}
-					<div class="container-fluid">
-						<div>Nous vous invitons à vous connecter !</div>
-						<button class="btn btn-lg btn_action text-white" >
-							<a class="text-white" href="{{ path('app_register') }}">Créer votre compte</a>
-						</button>
-
+				<div class="container-fluid access">
+					<div class="container access_home ">
+						<div class="row">
+							<h3 class="">
+								Pour profitez au maximum de cette plateforme en quelques clics !
+							</h3>
+							<div class="text-content">
+								<p class="">Vous pourrez accéder aux listes partagées pour réserver et choisir des objets de la liste d'un proche.</p>
+								<p class="">Vous pourrez également créer et partager votre propre liste pour un heureux évènement !</p>
+							</div>
+							<div class="col-md-6 create">
+								<h5 class="">Créer votre compte</h5>
+								<button class="btn btn-lg btn_action  text-white" >
+									<a class="text-white" href="{{ path('app_register') }}">Créer votre compte</a>
+								</button>
+							</div>
+							<div class="col-md-6 register">
+								<h5 class="">Connecter vous !</h5>
+								<button class="btn btn-lg btn_action text-white " >
+									<a class="text-white" href="{{ path('app_login') }}">Connexion</a>
+								</button>
+							</div>
+						</div>
 					</div>
+				</div>
 			{% endif %}
 		{% endif %}
-	</div>
+
+	<section class="parallax" data-url="/V3/images/parallax2_opt.jpg" data-mobile="true" data-speed="0.7" data-direction="inverse">
+		<div class="parallax_image" style="background-image: url({{ asset('/images/liste-de-naissance.jpg') }})";>
+		</div>
+		<div class="parallax_cnt">
+			<div class="container">
+				<div class="row">
+					<blockquote class="blockquote1 row center767 ">
+						<div class="col-md-7 search_content">
+							<h2>Vous recherchez une liste ? </h2>
+							<p>Rien de plus simple cliquez sur le bouton et recherchez votre liste par le nom de famille.</p>
+							<button id="shared" class="btn btn-lg  liste_btn btn_action text-white" >
+								<a class="text-white" href="{{ path('search_listes')}}">
+									<i class="fas fa-search"></i>Recherchez une liste</i>
+								</a>
+							</button>
+						</div>
+						<div class="col-md-5 border-add border-add__mod">
+						</div>
+					</blockquote>
+				</div>
+			</div>
+		</div>
+	</section>
 {% endblock %}

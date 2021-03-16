@@ -1,0 +1,112 @@
+/**HOMEPAGE**/
+.home-bk{
+	-webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+	filter: grayscale(100%);
+	object-fit: cover;
+	object-position: 100% 0;
+	width: 100%;
+	max-width: 100%;
+	height: 450px;
+	left: 0;
+	z-index: -1;
+}
+img{
+	max-width: 100%;
+}
+.container_info_liste{
+	text-align: center;
+	padding: 2rem 0;
+}
+.icon_info_liste, .info_liste{
+	font-size: 30px;
+}
+.icon_info_liste.one, .info_liste.one{
+	color:#5595c5 ;
+}
+.icon_info_liste.two, .info_liste.two{
+	color:#d36e70 ;
+}
+.icon_info_liste.three, .info_liste.three{
+	color:#d2527F ;
+}
+.icon_info_liste.four, .info_liste.four{
+	color:#7dc243 ;
+}
+.user_container_listes{
+	margin-top: 3rem;
+}
+.user_container_listes h2{
+	text-align: center;
+	color: #2c758e;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: bold;
+	font-size: 2rem;
+	margin: 1rem auto;
+}
+.container-listes{
+	margin: 2rem auto;
+}
+.listes_home{
+	background: #2c758e;
+	padding: 2rem 0;
+}
+.listes_home .container-fluid .container h2{
+	color: white;
+	text-align: center;
+}
+.left_body_card{
+	padding: 0 1rem;
+}
+.container-fluid.block-public-listes{
+	background: #2c758e;
+	margin-top: 0;
+	padding: 2rem 0;
+}
+.container.user_container_listes h2{
+	color: white;
+	padding-bottom: 2rem;
+}
+.link_to_liste{
+	color: white;
+	text-decoration: none;
+	position: absolute;
+	bottom: 10px;
+	right: 20px;
+}
+.link_to_liste .fas{
+	margin-left: 0.3rem;
+	color: white;
+}
+.link_to_liste:hover{
+	color: white;
+}
+.link_to_liste:hover .fas{
+	margin-left: 1rem;
+}
+.access{
+	background-color: #e3d4d9;
+	color: #444444;
+}
+.container.access_home{
+	padding: 4rem 0;
+	text-align: left;
+}
+.access_home .row h3{
+	color: #2c758e;
+}
+.access_home .row .create, .access_home .row .register{
+	text-align: center;
+}
+.access_home .row div h2{
+color: white;
+}
+.text-content{
+	margin: 1rem 0;
+	padding-bottom: 2rem;
+}
+.text-content p{
+	margin: 0;
+}
+.search_content{
+	padding-top: 4rem;
+}

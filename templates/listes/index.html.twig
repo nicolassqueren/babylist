@@ -3,79 +3,195 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-	{% if listes %}
 	<div>
 		<img class="home-bk" src="{{ asset('/images/home-bk.jpg') }}"/>
-		<h1 class="text-center">Vos listes de naissance</h1>
 	</div>
+	{% if listes %}
+
+<div class="listes_home">
 	<div class="container-fluid">
 			<div class="container">
 				<h2>Vos listes</h2>
 				<div class="container-listes">
 					{% for liste in listes %}
-						<div class="card liste-item" >
+						{% if liste.genre == "garcon" %}
+						<div class="card liste-item garcon" >
 							<img class="card-img-top" src="{{ asset('' ~ liste.image) }}" alt="Card image {{ liste.name }}">
 							<div class="card-body">
-								<h5 class="card-title">{{ liste.name }}</h5>
-								<p class="card-text">{{ liste.children }}</p>
-								<p class="card-text">{{ liste.description }}</p>
-								{% if  liste.isShared %}
-									<div class="info_shared_list">
-										<p>Votre liste est déja partagée !</p>
-										<a class="text-white" href="{{ liste.sharedurl }}">Voir votre liste <i class="fas fa-arrow-right"></i></a>
-									</div>
-									<div class="edit_list">
-										<button class="btn btn-lg btn_action text-white" >
-											<a class="text-white" href="{{ path('liste', {id: liste.id}) }}">
-												<i class="fas fa-cart-plus">	Ajouter des objets </i>
-											</a>
-										</button>
-									</div>
-									<div class="edit_list">
-										<button class="btn btn-lg btn_action text-white" >
-											<a class="text-white" href="{{ path('liste_edit', {id: liste.id}) }}">
-												<i class="icon-edit icon-large">	Modifier </i>
-											</a>
-										</button>
-									</div>
-								{% else %}
-									<div class="edit_list">
-										<button class="btn btn-lg btn_action text-white" >
-											<a class="text-white" href="{{ path('liste_edit', {id: liste.id}) }}">
-												<i class="icon-edit icon-large">	Modifier </i>
-											</a>
-										</button>
-									</div>
-									<div class="edit_list">
-										<button class="btn btn-lg btn_action text-white" >
-											<a class="text-white" href="{{ path('liste', {id: liste.id}) }}">
-												<i class="fas fa-cart-plus">	Ajouter des objets </i>
-											</a>
-										</button>
-									</div>
-								{% endif %}
-								<div class="delet-liste">
-									<button type="button" class="btn btn_warning px-3">
-										<a class="text-white" href="{{ path('liste_delete', {id: liste.id}) }}">
-											<i class="icon-trash"></i>
-										</a>
-									</button>false
+								<div class="left_body_card">
+									<h5 class="card-title">{{ liste.name }}</h5>
+									<p class="card-text">{{ liste.famille }}</p>
+									<p class="card-text">{{ liste.children }}</p>
+									<p class="card-text">{{ liste.description }}</p>
 								</div>
+								<div class="right_body_card">
+									{% if  liste.isShared %}
+										<div class="shared_list">
+											<p>Votre liste est déja partagée !</p>
+											<button class="btn btn-lg liste_btn btn_warning text-white" >
+												<a class="text-white" href="{{ path('liste_close', {id: liste.id}) }}">
+													<i class="fas fa-times-circle"></i>Fermer ma liste</i>
+												</a>
+											</button>
+											<div class="shared_liste">
+												<p>Voici le lien : </p>
+												<p>{{ liste.sharedurl }}</p>
+											</div>
+											<a class="text-white" href="{{ liste.sharedurl }}">Voir votre liste <i class="fas fa-arrow-right"></i></a>
+										</div>
+										<div class="edit_list">
+											<button class="btn btn-lg btn_action text-white" >
+												<a class="text-white" href="{{ path('liste', {id: liste.id}) }}">
+													<i class="fas fa-cart-plus">	Ajouter des objets </i>
+												</a>
+											</button>
+										</div>
+										<div class="edit_list">
+											<button class="btn btn-lg btn_action text-white" >
+												<a class="text-white" href="{{ path('liste_edit', {id: liste.id}) }}">
+													<i class="icon-edit icon-large">	Modifier </i>
+												</a>
+											</button>
+										</div>
+									{% else %}
+										<div class="shared_list">
+											<p>Il est temps de partager votre liste</p>
+											<button id="shared" class="btn btn-lg  liste_btn btn_action text-white" >
+												<a class="text-white" href="{{ path('liste_shared', {id: liste.id}) }}">
+													<i class="fas fa-share-alt"></i>Partager ma liste</i>
+												</a>
+											</button>
+										</div>
+										<div class="edit_list">
+											<button class="btn btn-lg btn_action text-white" >
+												<a class="text-white" href="{{ path('liste_edit', {id: liste.id}) }}">
+													<i class="icon-edit icon-large">	Modifier </i>
+												</a>
+											</button>
+										</div>
+										<div class="edit_list">
+											<button class="btn btn-lg btn_action text-white" >
+												<a class="text-white" href="{{ path('liste', {id: liste.id}) }}">
+													<i class="fas fa-cart-plus">	Ajouter des objets </i>
+												</a>
+											</button>
+										</div>
+									{% endif %}
+									<div class="delet-liste">
+										<button type="button" class="btn btn_warning px-3">
+											<a class="text-white" href="{{ path('liste_delete', {id: liste.id}) }}">
+												<i class="icon-trash"></i>
+											</a>
+										</button>
+									</div>
+								</div>
+
 							</div>
 						</div>
+						{% else %}
+							<div class="card liste-item fille" >
+								<img class="card-img-top" src="{{ asset('' ~ liste.image) }}" alt="Card image {{ liste.name }}">
+								<div class="card-body">
+									<div class="left_body_card">
+										<h5 class="card-title">{{ liste.name }}</h5>
+										<p class="card-text">{{ liste.famille }}</p>
+										<p class="card-text">{{ liste.children }}</p>
+										<p class="card-text">{{ liste.description }}</p>
+									</div>
+									<div class="right_body_card">
+										{% if  liste.isShared %}
+											<div class="shared_list">
+												<p>Votre liste est déja partagée !</p>
+												<button class="btn btn-lg liste_btn btn_warning text-white" >
+													<a class="text-white" href="{{ path('liste_close', {id: liste.id}) }}">
+														<i class="fas fa-times-circle"></i>Fermer ma liste</i>
+													</a>
+												</button>
+												<div class="shared_liste">
+													<p>Voici le lien : </p>
+													<p>{{ liste.sharedurl }}</p>
+												</div>
+												<a class="text-white" href="{{ liste.sharedurl }}">Voir votre liste <i class="fas fa-arrow-right"></i></a>
+											</div>
+											<div class="edit_list">
+												<button class="btn btn-lg btn_action text-white" >
+													<a class="text-white" href="{{ path('liste', {id: liste.id}) }}">
+														<i class="fas fa-cart-plus">	Ajouter des objets </i>
+													</a>
+												</button>
+											</div>
+											<div class="edit_list">
+												<button class="btn btn-lg btn_action text-white" >
+													<a class="text-white" href="{{ path('liste_edit', {id: liste.id}) }}">
+														<i class="icon-edit icon-large">	Modifier </i>
+													</a>
+												</button>
+											</div>
+										{% else %}
+											<div class="shared_list">
+												<p>Il est temps de partager votre liste</p>
+												<button id="shared" class="btn btn-lg  liste_btn btn_action text-white" >
+													<a class="text-white" href="{{ path('liste_shared', {id: liste.id}) }}">
+														<i class="fas fa-share-alt"></i>Partager ma liste</i>
+													</a>
+												</button>
+											</div>
+											<div class="edit_list">
+												<button class="btn btn-lg btn_action text-white" >
+													<a class="text-white" href="{{ path('liste_edit', {id: liste.id}) }}">
+														<i class="icon-edit icon-large">	Modifier </i>
+													</a>
+												</button>
+											</div>
+											<div class="edit_list">
+												<button class="btn btn-lg btn_action text-white" >
+													<a class="text-white" href="{{ path('liste', {id: liste.id}) }}">
+														<i class="fas fa-cart-plus">	Ajouter des objets </i>
+													</a>
+												</button>
+											</div>
+										{% endif %}
+										<div class="delet-liste">
+											<button type="button" class="btn btn_warning px-3">
+												<a class="text-white" href="{{ path('liste_delete', {id: liste.id}) }}">
+													<i class="icon-trash"></i>
+												</a>
+											</button>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						{% endif %}
 					{% endfor %}
 				</div>
 			</div>
 	</div>
 	{% else %}
-		<img class="home-bk" src="{{ asset('/images/home-bk.jpg') }}"/>
-		<div class="container-fluid" >
-			<div class="container">
-				<h1>Vous pouvez créer Vous aussi votre Liste</h1>
-				<button class="btn btn-lg  liste_btn btn_action text-white" >
-					<a class="text-white" href="{{ path('create_liste') }}">Créer ma Liste</a>
-				</button>
+		<section class="parallax" data-url="/V3/images/parallax2_opt.jpg" data-mobile="true" data-speed="0.7" data-direction="inverse">
+			<div class="parallax_image" style="background-image: url({{ asset('/images/parallax2_opt.jpg') }})";>
 			</div>
+			<div class="parallax_cnt">
+				<div class="container">
+					<div class="row">
+						<blockquote class="blockquote1 row center767">
+							<div class="col-md-7">
+
+							</div>
+							<div class="col-md-5 border-add border-add__mod">
+								<h2>Quoi ? vous n'avez pas encore de liste !</h2>
+								<q style="color: #474747;">En créant une liste de naissance, vous facilitez la tâche à vos proches et profitez au maximum de vos cadeaux.
+								</q>
+								<button class="btn btn-lg  liste_btn btn_action text-white" >
+									<a class="text-white" href="{{ path('create_liste') }}">Créer ma Liste</a>
+								</button>
+							</div>
+						</blockquote>
+					</div>
+				</div>
+			</div>
+		</section>
+		<div class="container-fluid" >
 			<div class="row container_info_liste">
 				<div class="col-md-3 col-sm-4 col-xs-12">
 					<i class="fas fa-clipboard-list icon_info_liste one"></i>
@@ -96,4 +212,5 @@
 			</div>
 		</div>
 	{% endif %}
+	</div>
 {% endblock %}

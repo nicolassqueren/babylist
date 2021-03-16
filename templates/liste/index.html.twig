@@ -3,86 +3,84 @@
 {% block title %}Liste de {{ liste.name }} {% endblock %}
 
 {% block body %}
-<div class="container-fluid">
-	<div class="container container-liste">
-		<div class="block-liste-infos">
-			<h1>Votre Liste {{ liste.name }}</h1>
-			<p>{{ liste.description }}</p>
-			<p>{{ liste.children }}</p>
-			<p>{{ liste.adresse }}</p>
-			{% if  liste.isShared %}
-			<div class="info_shared_list">
-				<p>Votre Liste est partagée !</p>
-			</div>
-			{% endif %}
-		</div>
-		<div class="actions-liste">
-			{% if  liste.isShared %}
-				<button class="btn btn-lg liste_btn btn_warning text-white" >
-					<a class="text-white" href="{{ path('liste_close', {id: liste.id}) }}">
-						<i class="fas fa-times-circle"></i>Close my List</i>
-					</a>
-				</button>
-				<div class="shared_liste">
-					<p>Voici le lien : <span class="liste_link">{{ liste.sharedurl }}</span></p>
-					<a href="{{ liste.sharedurl }}">Voir votre liste <i class="fas fa-arrow-right"></i></a>
+<section class="parallax" data-url="/V3/images/parallax2_opt.jpg" data-mobile="true" data-speed="0.7" data-direction="inverse">
+	<div class="parallax_image" style="background-image: url({{ asset('/images/listebk.jpg') }})"></div>
+		<div class="container-fluid">
+				<div class="container container-liste">
+				<div class="block-liste-infos">
+					<h1>Votre Liste {{ liste.name }}</h1>
+					<p>{{ liste.famille }}</p>
+					<p>{{ liste.description }}</p>
+					<p>{{ liste.children }}</p>
+					<p>{{ liste.adresse }}</p>
+					{% if  liste.isShared %}
+					<div class="info_shared_list">
+						<p>Votre Liste est partagée !</p>
+					</div>
+					{% endif %}
 				</div>
-			{% else %}
-				<button id="shared" class="btn btn-lg  liste_btn btn_action text-white" >
-					<a class="text-white" href="{{ path('liste_shared', {id: liste.id}) }}">
-						<i class="fas fa-share-alt"></i>Shared List</i>
+				<div class="actions-liste">
+					{% if  liste.isShared %}
+						<button class="btn btn-lg liste_btn btn_warning text-white" data-toggle="tooltip" data-html="true" title="Attention votre liste ne sera plus accessible !" >
+							<a class="text-white" href="{{ path('liste_close', {id: liste.id}) }}">
+								<i class="fas fa-times-circle"></i>Fermer ma liste</i>
+							</a>
+						</button>
+						<div class="shared_liste">
+							<p>Voici le lien : <span class="liste_link">{{ liste.sharedurl }}</span></p>
+							<a href="{{ liste.sharedurl }}">Voir votre liste <i class="fas fa-arrow-right"></i></a>
+						</div>
+					{% else %}
+						<button id="shared" class="btn btn-lg  liste_btn btn_action text-white" >
+							<a class="text-white" href="{{ path('liste_shared', {id: liste.id}) }}">
+								<i class="fas fa-share-alt"></i>Partager ma liste</i>
+							</a>
+						</button>
+					{% endif %}
+				</div>
+				<button class="btn btn-lg liste_btn btn_action text-white" >
+					<a class="text-white" href="{{ path('objet_new', {id: liste.id}) }}">
+						<i class="icon-plus-sign-alt"> Ajouter</i>
 					</a>
 				</button>
-			{% endif %}
+			</div>
 		</div>
-	</div>
-	<button class="btn btn-lg liste_btn btn_action text-white" >
-		<a class="text-white" href="{{ path('objet_new', {id: liste.id}) }}">
-			<i class="icon-plus-sign-alt"> Ajouter</i>
-		</a>
-	</button>
-</div>
-	<div class="container-fluid container-objets">
-		<table class="table">
-			<thead>
-			<tr>
-				<th style="width: 20%"  scope="col">image</th>
-				<th scope="col">title</th>
-				<th style="width: 20%" scope="col">description</th>
-				<th scope="col">link</th>
-				<th scope="col">state</th>
-				<th scope="col">brand</th>
-				<th scope="col">date</th>
-				<th scope="col">Actions</th>
-			</tr>
-			</thead>
+</section>
+	<div class="container-fluid container-objets_grid">
+		{% if objets %}
 		{% for objet in objets %}
-			<tbody>
-			<tr>
-				<td><img class="img-objet" src="{{ asset('' ~ objet.image) }}"/></td>
-				<td>{{ objet.title }}</td>
-				<td >{{ objet.description }}</td>
-				<td>
-					{% if objet.link %}
-						<a href="{{ objet.link }}"> Le lien {{ objet.title }}</a>
-					{% endif %}
-				</td>
-				<td>{{ objet.state }}</td>
-				<td>{{ objet.brand }}</td>
-				<td>
-					{% if objet.datechoice == "Avant la naissance" %}
-						<div><img class="delivery" src="{{ asset('/images/delivery.png') }}"/></div>
-						<div class="alert-danger">{{ objet.datechoice }}</div>
-					{% else %}
-						<div>{{ objet.datechoice }}</div>
-					{% endif %}
-
-				</td>
-				<td>
-
+			<div class="card objet-item">
+				<img class="card-img-top"src="{{ asset('' ~ objet.image) }}" alt="Card image cap">
+				<div class="card-body">
+					<h5 class="card-title">{{ objet.title }}</h5>
+					<p class="card-text description">
+						{{ objet.description }}
+					</p>
+					<p>
+						{% if objet.link %}
+							<a class="objet_link" href="{{ objet.link }}" target="_blank">
+								{{ objet.title }}
+								<i class="fas fa-external-link-alt"></i>
+							</a>
+						{% endif %}
+					</p>
+					<p><span class="label">Etat : </span>{{ objet.state }}</p>
+					<p><span class="label">Marque : </span>{{ objet.brand }}</p>
+					<p>
+						{% if objet.datechoice == "Avant la naissance" %}
+							<div class="alert-danger">
+								<img class="delivery" src="{{ asset('/images/delivery.png') }}"/>
+								{{ objet.datechoice }}
+							</div>
+						{% else %}
+							<div>{{ objet.datechoice }}</div>
+						{% endif %}
+					</p>
+				</div>
+				<div class="card-body card-actions">
 					<button class="btn btn-lg btn_action text-white" >
 						<a class="text-white" href="{{ path('objet_edit', {id: liste.id, objetId: objet.id}) }}">
-							<i class="icon-edit icon-large">	Edit </i>
+							<i class="icon-edit icon-large">	Modifier </i>
 						</a>
 					</button>
 					<button type="button" class="btn btn_warning px-3">
@@ -90,15 +88,14 @@
 							<i class="icon-trash"></i>
 						</a>
 					</button>
-				</td>
-			</tr>
-			</tbody>
-		{% else %}
-			<div>
-				<h2>no records found</h2>
+				</div>
 			</div>
 		{% endfor %}
-		</table>
+		{% else %}
+		<div>
+			<h3>No records found !</h3>
+		</div>
+		{% endif %}
 	</div>
-</div>
+
 {% endblock %}

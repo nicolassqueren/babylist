@@ -34,6 +34,18 @@ class ListeRepository extends ServiceEntityRepository
         ;
     }
 
+	/**
+	 * @return Liste[] Returns an array of Liste objects
+	 */
+	public function findFamilleListes($value)
+	{
+		return $this->createQueryBuilder('listes')
+			->andWhere('listes.famille = :val')
+			->setParameter('val', $value)
+			->getQuery()
+			->getResult()
+			;
+	}
 
     /*
     public function findOneBySomeField($value): ?Liste
