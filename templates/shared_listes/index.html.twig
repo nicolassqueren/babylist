@@ -13,7 +13,7 @@
 			{% for liste in listes_public %}
 				{% if  liste.isShared %}
 					{% if liste.genre == "garcon" %}
-					<div class="card liste-item col-md-12 fille">
+					<div class="card liste-item col-md-12 garcon">
 						<img class="card-img-top" src="{{ asset('' ~ liste.image) }}" alt="Card image {{ liste.name }}">
 						<div class="card-body shared">
 							<h5 class="card-title">{{ liste.name }}</h5>
@@ -26,7 +26,7 @@
 						</div>
 					</div>
 					{% else %}
-						<div class="card liste-item col-md-12 garcon">
+						<div class="card liste-item col-md-12 fille">
 							<img class="card-img-top" src="{{ asset('' ~ liste.image) }}" alt="Card image {{ liste.name }}">
 							<div class="card-body shared">
 								<h5 class="card-title">{{ liste.name }}</h5>
