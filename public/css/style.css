@@ -106,4 +106,13 @@ footer{
 	padding: 2rem 1rem;
 	color: white;
 }
-
+.user_nav{
+	display: flex;
+	text-align: right;
+}
+.mobile{
+	display: none;
+}
+.disabled{
+	opacity: 0.5;
+}

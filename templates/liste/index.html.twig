@@ -46,7 +46,11 @@
 			</div>
 		</div>
 </section>
-	<div class="container-fluid container-objets_grid">
+{% if liste.genre == "garcon" %}
+	<div class="container-fluid container-objets_grid garcon">
+{% else %}
+	<div class="container-fluid container-objets_grid fille">
+{% endif %}
 		{% if objets %}
 		{% for objet in objets %}
 			<div class="card objet-item">

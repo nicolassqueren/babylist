@@ -12,7 +12,7 @@
 		<div class="container ">
 			{{ form_errors(objetform) }}
 			{{ form_start(objetform) }}
-			<div class="row">
+			<div class="row form_custom">
 				<div class="col">
 					{{ form_row(objetform.title) }}
 					{{ form_errors(objetform.title) }}
@@ -25,7 +25,7 @@
 				{{ form_row(objetform.description) }}
 				{{ form_errors(objetform.description) }}
 			</div>
-			<div class="row">
+			<div class="row form_custom">
 				<div class="col">
 					{{ form_row(objetform.link) }}
 				</div>
@@ -33,7 +33,7 @@
 					{{ form_row(objetform.state) }}
 				</div>
 			</div>
-			<div class="row">
+			<div class="row form_custom">
 				<div class="col">
 					{{ form_row(objetform.datechoice) }}
 				</div>

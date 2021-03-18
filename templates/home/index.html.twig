@@ -6,7 +6,7 @@
 	<div>
 		<img class="home-bk" src="{{ asset('/images/home-bk.jpg') }}"/>
 	</div>
-	<div class="container-fluid">
+	<div class="container-fluid home_block">
 		<div class="row container_info_liste">
 			<div class="col-md-3 col-sm-4 col-xs-12">
 				<i class="fas fa-clipboard-list icon_info_liste one"></i>
@@ -25,7 +25,7 @@
 				<div class="info_liste four" >4. Recevez vos cadeaux</div>
 			</div>
 		</div>
-		<section class="parallax" data-url="/V3/images/parallax2_opt.jpg" data-mobile="true" data-speed="0.7" data-direction="inverse">
+		<section class="parallax home-parallax" data-url="/V3/images/parallax2_opt.jpg" data-mobile="true" data-speed="0.7" data-direction="inverse">
 			<div class="parallax_image" style="background-image: url({{ asset('/images/parallax2_opt.jpg') }})";>
 			</div>
 			<div class="parallax_cnt">
@@ -216,7 +216,7 @@
 								<h2 class="text-center">Les listes accessibles</h2>
 							</div>
 
-						<div class="container col-md-6 listes_public row">
+						<div class="container col-lg-6 col-md-12listes_public row">
 							{% for liste in listes_public %}
 								{% if  liste.isShared %}
 									{% if liste.genre == "garcon" %}

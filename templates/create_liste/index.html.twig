@@ -16,7 +16,7 @@
 			{{ form_errors(listeform) }}
 			{#	{{ Détails du formulaire élément par élémént avec des éléments en plus }}#}
 			{{ form_start(listeform) }}
-			<div class="row">
+			<div class="row form_custom">
 				<div class="col">
 					{{ form_row(listeform.name) }}
 					{{ form_errors(listeform.name) }}
@@ -36,7 +36,7 @@
 				{{ form_row(listeform.description) }}
 				{{ form_errors(listeform.description) }}
 			</div>
-			<div class="row">
+			<div class="row form_custom">
 				<div class="col">
 					{{ form_row(listeform.children) }}
 				</div>
@@ -44,7 +44,7 @@
 					{{ form_row(listeform.genre) }}
 				</div>
 			</div>
-			<div class="row">
+			<div class="row form_custom">
 				<div class="col">
 					{{ form_row(listeform.adresse) }}
 				</div>

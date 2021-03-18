@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Welcome!{% endblock %}</title>
 		{% block stylesheets %}
 
@@ -15,6 +16,7 @@
 			<link rel="stylesheet" href="{{ asset('css/homepage.css') }}">
 			<link rel="stylesheet" href="{{ asset('css/liste.css') }}">
 			<link rel="stylesheet" href="{{ asset('css/objets.css') }}">
+			<link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
 		{% endblock %}
 
 		{% block javascripts %}
@@ -32,12 +34,18 @@
 	<div class="container-fluid header-nav ">
 		<nav class="navbar navbar-expand-lg sticky-top">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="{{ path('home') }}"><i class="fas fa-baby-carriage logo"></i></a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
+					<span class="navbar-toggler-icon">
+						<i class="fas fa-bars text-white"></i>
+					</span>
 				</button>
+				<a class="navbar-brand desktop" href="{{ path('home') }}"><i class="fas fa-baby-carriage logo"></i></a>
+
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item mobile">
+							<a class="nav-link" href="{{ path('home') }}"><i class="fas fa-baby-carriage logo"></i>Accueil</a>
+						</li>
 						{% if app.user %}
 							<li class="nav-item">
 								<a class="nav-link active" aria-current="page" href="{{ path('listes') }}" > <i class="fas fa-clipboard-list"></i> Mes listes</a>
@@ -71,13 +79,13 @@
 						</li>
 					</ul>
 				</div>
-				{% if app.user %}
-					<div style="text-align: center; display:flex">
-						<span style="color: white;" >{{ app.user.name }}</span>
-						<a class="text-white logout" href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i></a>
-					</div>
-				{% endif %}
 			</div>
+			{% if app.user %}
+				<div class="user_nav" >
+					<span style="color: white;" >{{ app.user.name }}</span>
+					<a class="text-white logout" href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i></a>
+				</div>
+			{% endif %}
 		</nav>
 	</div>
 	<div class="container-fluid">
