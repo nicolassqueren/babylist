@@ -77,7 +77,7 @@ class SharedListController extends AbstractController
 		$this->addFlash('error','Vous venez de clore votre liste ! Félicitations :) ! Un email viens de vous être envoyé pour le récapitulatif');
 		//Send mail too user for close liste action
 		$email = (new TemplatedEmail())
-			->from('nicosqueren@gmail.com')
+			->from('mybabylistefr@gmail.com')
 			->to($user->getEmail())
 			->subject('Fermeture de votre liste !')
 			->htmlTemplate('emails/close_liste.html.twig')

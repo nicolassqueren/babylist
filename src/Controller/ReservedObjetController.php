@@ -32,9 +32,9 @@ class ReservedObjetController extends AbstractController
 			$entityManager->flush();
 			//Send Email to user reservation
 			$email = (new TemplatedEmail())
-				->from('nicosqueren@gmail.com')
+				->from('mybabylistefr@gmail.com')
 				->to($user->getEmail())
-				->subject('Fermeture de votre liste !')
+				->subject('Merci pour votre réservation !')
 				->htmlTemplate('emails/reserved_objet.html.twig')
 				->context([
 					'user' => $user,
@@ -43,7 +43,7 @@ class ReservedObjetController extends AbstractController
 				]);
 			//Send email to owner for a reservation
 			$emailOwner = (new TemplatedEmail())
-				->from('nicosqueren@gmail.com')
+				->from('mybabylistefr@gmail.com')
 				->to($owner->getEmail())
 				->subject('Reservation d un objet de votre liste ! ')
 				->htmlTemplate('emails/owner_reserved_objet.html.twig')

@@ -1,4 +1,3 @@
 framework:
     mailer:
-        envelope:
-            recipients: ['nicosqueren@gmail.com']
+        dsn: '%env(MAILER_DSN)%'
