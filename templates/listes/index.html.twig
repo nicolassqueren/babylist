@@ -16,8 +16,11 @@
 					{% for liste in listes %}
 						{% if liste.genre == "garcon" %}
 						<div class="card liste-item garcon" >
-							<img class="card-img-top" src="{{ asset('' ~ liste.image) }}" alt="Card image {{ liste.name }}">
-							<div class="card-body">
+							{% if liste.image is empty %}
+								<img class="card-img-top" src="{{ asset('/images/liste_sans_image.jpg') }}" alt="Card image {{ liste.name }}">
+							{% else %}
+								<img class="card-img-top" src="{{ asset('' ~ liste.image) }}" alt="Card image {{ liste.name }}">
+							{% endif %}							<div class="card-body">
 								<div class="left_body_card">
 									<h5 class="card-title">{{ liste.name }}</h5>
 									<p class="card-text">{{ liste.famille }}</p>
@@ -34,7 +37,7 @@
 												</a>
 											</button>
 											<div class="shared_liste">
-												<p>Voici le lien : </p>
+												<p>Partagez ce lien à vos proches : </p>
 												<p>{{ liste.sharedurl }}</p>
 											</div>
 											<a class="text-white" href="{{ liste.sharedurl }}">Voir votre liste <i class="fas fa-arrow-right"></i></a>
@@ -90,8 +93,11 @@
 						</div>
 						{% else %}
 							<div class="card liste-item fille" >
-								<img class="card-img-top" src="{{ asset('' ~ liste.image) }}" alt="Card image {{ liste.name }}">
-								<div class="card-body">
+								{% if liste.image is empty %}
+									<img class="card-img-top" src="{{ asset('/images/liste_sans_image.jpg') }}" alt="Card image {{ liste.name }}">
+								{% else %}
+									<img class="card-img-top" src="{{ asset('' ~ liste.image) }}" alt="Card image {{ liste.name }}">
+								{% endif %}								<div class="card-body">
 									<div class="left_body_card">
 										<h5 class="card-title">{{ liste.name }}</h5>
 										<p class="card-text">{{ liste.famille }}</p>
@@ -108,7 +114,7 @@
 													</a>
 												</button>
 												<div class="shared_liste">
-													<p>Voici le lien : </p>
+													<p>Partagez ce lien à vos proches : </p>
 													<p>{{ liste.sharedurl }}</p>
 												</div>
 												<a class="text-white" href="{{ liste.sharedurl }}">Voir votre liste <i class="fas fa-arrow-right"></i></a>

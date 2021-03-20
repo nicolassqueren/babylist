@@ -93,3 +93,9 @@ a.nav-link{
     right: 5%;
 	color: #DE3C4B ;
 }
+.shared_liste p:last-child{
+	margin: 1rem 0;
+	font-size: 1rem;
+	text-decoration: underline;
+	color: #DE3C4B;
+}

@@ -43,7 +43,8 @@ class ObjetType extends AbstractType
 			])
             ->add('link', TextType::class, [
 				'label' => 'Lien',
-				'attr' => ['placeholder' => 'https://www.example.com']
+				'attr' => ['placeholder' => 'https://www.example.com'],
+				'required' => false
 
 			])
             ->add('state', TextType::class, [

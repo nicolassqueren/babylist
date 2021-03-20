@@ -36,6 +36,9 @@ MOBILE
 	}
 	.user_nav{
 		flex: 1;
+		position: absolute;
+		right: 10px;
+		top: 15px;
 	}
 	.navbar-toggler .navbar-toggler-icon .fa-bars{
 		font-size: 1.8rem;

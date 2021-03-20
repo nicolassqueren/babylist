@@ -27,7 +27,7 @@
 							</a>
 						</button>
 						<div class="shared_liste">
-							<p>Voici le lien : <span class="liste_link">{{ liste.sharedurl }}</span></p>
+							<p>Partagez ce lien à vos proches : <span class="liste_link">{{ liste.sharedurl }}</span></p>
 							<a href="{{ liste.sharedurl }}">Voir votre liste <i class="fas fa-arrow-right"></i></a>
 						</div>
 					{% else %}
@@ -54,7 +54,11 @@
 		{% if objets %}
 		{% for objet in objets %}
 			<div class="card objet-item">
-				<img class="card-img-top"src="{{ asset('' ~ objet.image) }}" alt="Card image cap">
+				{% if objet.image is empty %}
+					<img class="card-img-top"src="{{ asset('/images/objet_sans_image.jpg') }}" alt="Card image cap">
+				{% else %}
+					<img class="card-img-top"src="{{ asset('' ~ objet.image) }}" alt="Card image cap">
+				{% endif %}
 				<div class="card-body">
 					<h5 class="card-title">{{ objet.title }}</h5>
 					<p class="card-text description">
@@ -96,8 +100,8 @@
 			</div>
 		{% endfor %}
 		{% else %}
-		<div>
-			<h3>No records found !</h3>
+		<div class="container-fluid text-center">
+			<h3>Aucun objet présent dans votre liste</h3>
 		</div>
 		{% endif %}
 	</div>

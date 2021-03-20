@@ -41,7 +41,9 @@ class ListeType extends AbstractType
 				'attr' => ['class' => 'js-datepicker'],
 			])
             ->add('children', TextType::class, [
-				'attr' => ['placeholder' => 'Votre enfant'],
+				'label' => 'Prénom de l\'enfant',
+				'attr' => ['placeholder' => 'Facultatif'],
+				'required' => false,
 
 			])
 			->add('genre', ChoiceType::class,[
