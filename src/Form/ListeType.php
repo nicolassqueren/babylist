@@ -20,7 +20,8 @@ class ListeType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-            	'attr' => ['placeholder' => 'Votre nom', 'class' => 'required'],
+				'label' => 'Titre ',
+            	'attr' => ['placeholder' => 'Titre', 'class' => 'required'],
 				'required' => true,
 
 			])

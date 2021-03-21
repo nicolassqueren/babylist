@@ -125,18 +125,32 @@
 		</div>
 	{% endif %}
 {% else %}
-<img class="home-bk" src="{{ asset('/images/home-bk.jpg') }}"/>
-<div class="container-fluid" >
-	<div class="alert-danger text-center">Enregistrez vous pour accéder a cette liste, elle n'est pour l'instant inaccessible !</div>
-	<div class="container">
-		<div>{{ liste.name }}</div>
-		<div>{{ liste.description }}</div>
-		<div>{{ liste.children }}</div>
-		<button class="btn btn-lg btn_action text-white" >
-			<a class="text-white" href="{{ path('app_register') }}">Créer votre compte</a>
-		</button>
-
-	</div>
-</div>
+	<section class="parallax" data-url="/V3/images/parallax2_opt.jpg" data-mobile="true" data-speed="0.7" data-direction="inverse">
+		<div class="parallax_image" style="background-image: url({{ asset('/images/listebk.jpg') }})"></div>
+		<div class="container-fluid">
+			<div class="container container-liste">
+				<div class="container">
+					{% if liste.genre == "garcon" %}
+						<h1 class="title_garcon">Voici la Liste {{ liste.name }}</h1>
+					{% else %}
+						<h1 class="title_fille">Voici la Liste {{ liste.name }}</h1>
+					{% endif %}
+				</div>
+				<div class="container-fluid">
+					<div class="container">
+						<p>{{ liste.description }}</p>
+						<p><i class="fas fa-baby"></i> {{ liste.children }}</p>
+						<p><i class="fas fa-house-user"></i></i> {{ liste.famille }}</p>
+						<p><i class="fas fa-shipping-fast"></i> {{ liste.adresse }}</p>
+						<p><i class="fas fa-calendar-check"></i> {{ liste.enddate|date("m/d/Y") }}</p>
+					</div>
+					<div class="alert-danger text-center">Enregistrez vous pour accéder a cette liste, elle n'est pour l'instant inaccessible !</div>
+					<button class="btn btn-lg btn_action text-white" >
+						<a class="text-white" href="{{ path('app_register') }}">Créer votre compte</a>
+					</button>
+				</div>
+			</div>
+		</div>
+	</section>
 {% endif %}
 {% endblock %}
